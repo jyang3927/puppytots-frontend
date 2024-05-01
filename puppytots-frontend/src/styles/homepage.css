@@ -1,0 +1,33 @@
+.HomePage{
+    display: flex;
+    flex-direction: column;
+}
+
+.WelcomeHeader{
+    color: #9c27b0; 
+    font-size: 50px;
+    margin: 20px;
+}
+
+.sniglet-regular {
+    font-family: "Sniglet", system-ui;
+    font-weight: 400;
+    font-style: normal;
+}
+  
+.sniglet-extrabold {
+    font-family: "Sniglet", system-ui;
+    font-weight: 800;
+    font-style: normal;
+}
+  
+
+.PawPrint{
+    height: 70px;
+}
+
+.Header{
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
