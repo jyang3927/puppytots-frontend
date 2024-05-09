@@ -1,12 +1,6 @@
-.HomePage{
-    display: flex;
-    flex-direction: column;
-}
-
-.WelcomeHeader{
-    color: #9c27b0; 
-    font-size: 30px;
-    margin: 20px;
+.Breed{
+    color: #9c27b0;
+    margin: 15px;
 }
 
 .sniglet-regular {
@@ -20,14 +14,14 @@
     font-weight: 800;
     font-style: normal;
 }
-  
 
-.PawPrint{
-    height: 50px;
+.PuppyTitle{
+    display: flex;
+    align-items: center;
+    justify-content: center;
 }
 
-.Header{
-    display: flex;
-    justify-content: center;
+.PawPrint{
     align-items: center;
+    justify-content: center;
 }

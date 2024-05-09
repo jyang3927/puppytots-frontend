@@ -10,7 +10,6 @@ export function HomePage(){
                 <img className="PawPrint" src="images/two-dog-pawprints-svgrepo-com (6).svg"/>
             </div>
             <NavBar/>
-
         </div>
     )
 }

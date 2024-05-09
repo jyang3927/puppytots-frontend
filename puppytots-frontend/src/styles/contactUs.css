@@ -1,0 +1,33 @@
+.ContactUs{
+    display: flex;
+    height: auto;
+    width: auto;
+    flex-direction: column;
+}
+
+.ContactUsTitle{
+    font-family:Verdana, Geneva, Tahoma, sans-serif; 
+    color: rgb(172, 34, 197);
+}
+
+.sniglet-regular {
+    font-family: "Sniglet", system-ui;
+    font-weight: 400;
+    font-style: normal;
+}
+  
+.sniglet-extrabold {
+    font-family: "Sniglet", system-ui;
+    font-weight: 800;
+    font-style: normal;
+}
+
+.ContactUsPhoto{
+    height: 60vh;
+    margin-right:50px;
+    margin-top: 10px;
+    border-radius: 30px;
+    border: 5px solid #ba6ac9;
+    align-items: center;
+    box-shadow: 4px 5px #e6c4ec;
+}
