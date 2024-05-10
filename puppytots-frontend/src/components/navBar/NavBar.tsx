@@ -11,14 +11,14 @@ export function NavBar(){
                 <Link to={`/ourDogs`}>
                     <Button color="secondary" sx={{fontSize:"10px", margin:"0 10px", fontWeight:"bold"}}>Our Dogs</Button>
                 </Link>
-                <Link to={`/puppies/maltipoos`}>
-                    <Button color="secondary" sx={{fontSize:"10px", margin:"0 10px", fontWeight:"bold"}}>Maltipoos</Button>
+                <Link to={`/puppies/maltipoo`}>
+                    <Button color="secondary" sx={{fontSize:"10px", margin:"0 10px", fontWeight:"bold"}}>Maltipoo</Button>
                 </Link>
                 <Link to={`/puppies/toy-poodle`}>
-                    <Button color="secondary" sx={{fontSize:"10px", margin:"0 10px", fontWeight:"bold"}}>Toy Poodles</Button>
+                    <Button color="secondary" sx={{fontSize:"10px", margin:"0 10px", fontWeight:"bold"}}>Toy Poodle</Button>
                 </Link>
-                <Link to={`/puppies/shihpoos`}>
-                    <Button color="secondary" sx={{fontSize:"10px", margin:"0 10px", fontWeight:"bold"}}>Shihpoos</Button>
+                <Link to={`/puppies/shihpoo`}>
+                    <Button color="secondary" sx={{fontSize:"10px", margin:"0 10px", fontWeight:"bold"}}>Shihpoo</Button>
                 </Link>
                 <Link to={`/contactUs`}>
                     <Button color="secondary" sx={{fontSize:"10px", margin:"0 10px", fontWeight:"bold"}}>Contact Us</Button>

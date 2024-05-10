@@ -1,15 +1,29 @@
 import { useParams } from "react-router-dom";
-import { Puppy } from "./Puppy";
+import { PuppyCard } from "./PuppyCard";
 import { NavBar } from "../navBar/NavBar";
 import '../../styles/puppiesPage.css'
+import { usePuppy } from "../../hooks/usePuppy";
+import { useEffect } from "react";
+import { NewPuppyForm } from "../forms/NewPuppyForm";
 
 export function PuppiesPage(){
 
     const {breed} = useParams(); 
 
+    const {setBreedName, puppies, breedName} = usePuppy(); 
+    
+    useEffect(() => {
+        if(breed !== undefined){
+            setBreedName(breed); 
+            console.log("breedName: " + breedName); 
+            console.log("puppieslist: " + puppies)
+        }
+    }, [breed])
+
     const breedType = () => {
         let breedTitle = breed?.replace("-", " "); 
-        return breedTitle?.toUpperCase();
+        let breedName = breedTitle?.toUpperCase(); 
+        return breedName;
     }
 
     return(
@@ -22,8 +36,11 @@ export function PuppiesPage(){
                 </div>
                 <NavBar/>
             </div>
-            <div>
-                <Puppy/>
+            <div className="AddPuppyButton">
+                <NewPuppyForm/>
+            </div>
+            <div className="PuppyList">
+                {puppies !== null && puppies.map((puppy) => <PuppyCard puppy={puppy}/>)}
             </div>
         </div>
     )

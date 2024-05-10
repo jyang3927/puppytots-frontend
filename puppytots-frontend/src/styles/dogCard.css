@@ -1,0 +1,30 @@
+.DogCard{
+    background-color: #E0C2FF;
+    width: 30vw;
+    height: auto;
+    margin: 20px;
+    border-radius: 10px;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    color: #811394;
+}
+
+.DogCardContainer{
+    display: flex;
+    width: 20vw;
+    flex-direction: column;
+    background-color: #f3ecf9;
+    border-radius: 10px;
+    justify-content: center;
+    align-items: center;
+    margin: 10px;
+    padding: 15px;
+    font-size: .75rem;
+    color:#9c27b0;
+}
+
+.DogCardDetails{
+    margin: 2px;
+}

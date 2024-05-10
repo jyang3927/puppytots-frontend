@@ -4,6 +4,7 @@ import dbAxiosInstance from "../helpers/dbAxiosInstace";
 export const getAllPuppiesByBreed = async(breed: string): Promise<Puppy[]> => {
     try{
         const response = await dbAxiosInstance.get(`/puppies/${breed}`); 
+        console.log("RESPONSE FROM SERVICE ALL PUPPIES" + response.data)
         return response.data; 
     }catch(error:any){
         console.error("Failed to fetch puppies", error); 

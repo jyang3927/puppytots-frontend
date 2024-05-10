@@ -25,3 +25,12 @@
     align-items: center;
     justify-content: center;
 }
+
+.PuppyList{
+    display: flex;
+    flex-wrap: wrap;
+}
+
+.NewPuppyForm{
+    margin-top: 20px;
+}

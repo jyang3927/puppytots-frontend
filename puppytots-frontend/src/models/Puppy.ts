@@ -1,8 +1,8 @@
 export interface Puppy{
     id?: string; 
     breed: string; 
-    motherId: string; 
-    fatherId: string; 
+    motherName: string; 
+    fatherName: string; 
     birth: Date; 
     sex: string; 
     price: number;

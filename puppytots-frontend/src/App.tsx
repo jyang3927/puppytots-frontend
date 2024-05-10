@@ -7,7 +7,7 @@ import { PuppiesPage } from './components/puppies/PuppiesPage';
 import { Maltipoo } from './components/breeds/Maltipoo';
 import { ToyPoodle } from './components/breeds/ToyPoodle';
 import { Shihpoo } from './components/breeds/Shihpoo';
-import { Puppy } from './components/puppies/Puppy';
+import { PuppyCard } from './components/puppies/PuppyCard';
 import { ContactUs } from './components/contact-us/ContactUs';
 import { OurDogs } from './components/our-dogs/OurDogs';
 
@@ -18,7 +18,7 @@ function App() {
         <Route path="/" element={<HomePage/>}/>
         <Route path="/ourDogs" element={<OurDogs/>}/>
         <Route path="/puppies/:breed" element={<PuppiesPage/>}/>
-        <Route path="/puppies/:breed/:id" element={<Puppy/>}/>
+        {/* <Route path="/puppies/:breed/:id" element={<PuppyCard/>}/> */}
         <Route path="/contactUs" element={<ContactUs/>}/>
       </Routes>
     </div>

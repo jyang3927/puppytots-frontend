@@ -6,7 +6,7 @@ export function ContactUs(){
     return(
         <div className="ContactUs">
             <div>
-                            <div className="Header">
+                <div className="Header">
                 <img className="PawPrint" src="images/two-dog-pawprints-svgrepo-com (7).svg"/>
                 <h1 className="WelcomeHeader sniglet-extrabold ">Welcome to PuppyTots</h1>
                 <img className="PawPrint" src="images/two-dog-pawprints-svgrepo-com (6).svg"/>

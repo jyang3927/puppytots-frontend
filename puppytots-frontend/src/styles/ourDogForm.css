@@ -1,0 +1,4 @@
+.NewDogForm{
+    display: flex;
+    flex-direction: column;
+}
