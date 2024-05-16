@@ -22,7 +22,7 @@ export const DogProvider = ({children}: DogContextProviderProps) => {
 
     useEffect(() => {
         getAllOurDogs(); 
-    }, []); 
+    }, [newDog]); 
 
     const createNewDog = async(newDog:Dog): Promise<Dog> => {
         try{

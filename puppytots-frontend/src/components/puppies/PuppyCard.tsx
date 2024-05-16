@@ -21,6 +21,7 @@ export function PuppyCard({puppy}: PuppyProps){
             <div className="PuppyProfile">
                 <h5></h5>
                 <div className="PuppyDetailsContainer sniglet-regular">
+                    <img src={puppy.imageName} className="PuppyImageProfile"/>
                     <div className="PuppyDetails"><span className="PuppyDetailsLabel">Sex: </span>{puppy.sex}</div>
                     <div className="PuppyDetails"><span className="PuppyDetailsLabel">Mother: </span>{puppy.motherName}</div>
                     <div className="PuppyDetails"><span className="PuppyDetailsLabel">Father: </span>{puppy.fatherName}</div>

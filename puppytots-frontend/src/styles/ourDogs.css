@@ -1,12 +1,22 @@
 .FemaleHeader{
     color: #9c27b0;
-    font-size: 20px;
+    font-size: 2rem;
     margin: 7px;
 }
 .MaleHeader{
     color: #9c27b0;
-    font-size: 20px;
+    font-size: 2rem;
     margin: 7px;
+}
+
+.FemaleDogDisplay{
+    display: flex;
+    flex-wrap: wrap;
+}
+
+.MaleDogDisplay{
+    display: flex;
+    flex-wrap: wrap;
 }
 
 .OurDogsContent{

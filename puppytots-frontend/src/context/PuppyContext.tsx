@@ -1,11 +1,13 @@
 import {ReactNode, createContext, useState, useEffect} from "react"; 
 import { Puppy } from "../models/Puppy";
-import { getAllPuppiesByBreed } from "../services/database/dbPuppies";
+import { createPuppy, getAllPuppiesByBreed } from "../services/database/dbPuppies";
 
 interface PuppyContextType{
     setPuppyByBreed:(breed:string) => Promise<Puppy[]>; 
     setBreedName:(breed:string) => void; 
+    createNewPuppy:(puppyInfo:Puppy) => Promise<Puppy>;
     puppies:Puppy[] | null; 
+    setNewPuppy: (newPup:Puppy) => void; 
     breedName: string | null;
 }
 
@@ -18,6 +20,7 @@ interface PuppyContextProviderProps{
 export const PuppyProvider = ({children}: PuppyContextProviderProps) => {
     const [puppies, setPuppies] = useState<Puppy[] | null>(null); 
     const [breedName, setBreedName] = useState<string | null>(null); 
+    const [newPuppy, setNewPuppy] = useState<Puppy | null>(null); 
 
     useEffect(() => {
         if(breedName !== null){
@@ -25,7 +28,7 @@ export const PuppyProvider = ({children}: PuppyContextProviderProps) => {
             setPuppyByBreed(breedName); 
             console.log("puppies after breedName changed: " + puppies)
         }
-    }, [breedName]); 
+    }, [breedName, newPuppy]); 
 
     const setPuppyByBreed = async(breed:string): Promise<Puppy[]> => {
         try{
@@ -40,8 +43,19 @@ export const PuppyProvider = ({children}: PuppyContextProviderProps) => {
         }
     }; 
 
+    const createNewPuppy = async(puppyInfo:Puppy): Promise<Puppy> => {
+        try{
+            let response = await createPuppy(puppyInfo);  
+            setNewPuppy(response); 
+            return response; 
+        } catch(error:any){
+            console.log("error in context Puppy"); 
+            return error; 
+        }
+    };
+
     return(
-        <PuppyContext.Provider value={{setPuppyByBreed, setBreedName, puppies, breedName}}> 
+        <PuppyContext.Provider value={{setPuppyByBreed, createNewPuppy, setBreedName, puppies, setNewPuppy, breedName}}> 
             {children}
         </PuppyContext.Provider>
     )

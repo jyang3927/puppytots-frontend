@@ -9,7 +9,7 @@ import { OurDogsForm } from "../forms/OurDogsForm";
 
 export function OurDogs(){
 
-    const{ourDogsList, setNewDog} = useDog();
+    const{ourDogsList} = useDog();
 
     const [femaleDogs, setFemaleDogs] = useState<Dog[] | null>(null); 
     const [maleDogs, setMaleDogs] = useState<Dog[] | null>(null) ;
@@ -21,14 +21,14 @@ export function OurDogs(){
 
     const getFemaleDogs = () => {
         if (ourDogsList !== null){
-            let getAllFemales = ourDogsList.filter(dogs => dogs.sex === "female")
+            let getAllFemales = ourDogsList.filter(dogs => dogs.sex.toLowerCase() === "female")
             setFemaleDogs(getAllFemales);  
         }
     }
 
     const getMaleDogs = () => {
         if(ourDogsList !== null){
-            let getAllMales = ourDogsList.filter(dog => dog.sex === "male"); 
+            let getAllMales = ourDogsList.filter(dog => dog.sex.toLowerCase() === "male"); 
             setMaleDogs(getAllMales);
         }
     }
@@ -49,16 +49,14 @@ export function OurDogs(){
                 </div>
                 <Container sx={{margin: 'auto'}}>
                     <h4 className="FemaleHeader sniglet-extrabold">FEMALES</h4>
-                    <div>
+                    <div className="FemaleDogDisplay">
                         {femaleDogs?.map(femaleDog => <DogCard dogInfo={femaleDog}/>)}
                     </div>
                 </Container>
                 <Container>
                     <h4 className="MaleHeader sniglet-extrabold">MALES</h4>
-                    <div>
-                    <div>
+                    <div className="MaleDogDisplay">
                         {maleDogs?.map(maleDog => <DogCard dogInfo={maleDog}/>)}
-                    </div>
                     </div>
                 </Container>
             </div>

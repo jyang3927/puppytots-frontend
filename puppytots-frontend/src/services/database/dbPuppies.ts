@@ -14,10 +14,12 @@ export const getAllPuppiesByBreed = async(breed: string): Promise<Puppy[]> => {
 
 export const createPuppy = async(puppyData: Puppy): Promise<Puppy> => {
     try{
+        
+        // console.log("PUPPY DATA AFTER MULTIPART", puppyData.entries()); 
         const response = await dbAxiosInstance.post(`/puppies`, puppyData); 
         return response.data; 
     }catch(error:any){
-        console.error("Failed to create puppy profile", error); 
+        console.error("Failed to create puppy profile", error.response.data); 
         throw error; 
     }
 }; 
