@@ -1,16 +1,11 @@
 import { Box, Button, FormControlLabel, FormLabel, Modal, Radio, RadioGroup, TextField, styled } from "@mui/material";
-import { FormEvent, useState } from "react";
+import { useEffect, useState } from "react";
 import { DatePicker, LocalizationProvider } from '@mui/x-date-pickers';
 import { AdapterDayjs } from '@mui/x-date-pickers/AdapterDayjs';
 import { CloudUpload } from "@mui/icons-material";
 import { usePuppy } from "../../hooks/usePuppy";
 import React from "react";
 import dayjs, { Dayjs } from "dayjs";
-import axios from "axios";
-
-
-import CryptoJS from 'crypto-js'; 
-
 import { ref, uploadBytes, getDownloadURL } from "firebase/storage";
 import { storage } from "../../config/firebaseConfig";
 
@@ -32,12 +27,11 @@ export function NewPuppyForm(){
 
     let currentdate = new Date(); 
 
-    const {createNewPuppy, setNewPuppy} = usePuppy(); 
+    const {createNewPuppy} = usePuppy(); 
 
-    // const [state, setState] = useState('ready'); 
     const [file, setFile] = React.useState<File | undefined>(undefined); 
 
-    const [imageUrl, setImageUrl] = useState(""); 
+    const [imageUrl, setImageUrl] = useState<string | undefined>(""); 
 
     const [open, setOpen] = useState(false); 
     const [sex, setSex] = useState("Female"); 
@@ -77,51 +71,86 @@ export function NewPuppyForm(){
         setBreed((event.target as HTMLInputElement).value);
     };
 
-    const handleOnChange = (e: React.FormEvent<HTMLInputElement>) => {
+    const handleOnChange = async (e: React.FormEvent<HTMLInputElement>) => {
         const target = e.target as HTMLInputElement & {
             files: FileList; 
         }
-        setFile(target.files[0])
-        console.log("file", file)
+        setFile(target.files[0]);
     }
 
-    const uploadFile= () => {
+
+    const uploadFile= async () => {
         if(!file) return; 
         const randomImageName = () => crypto.randomUUID().toString(); 
         let randomName = randomImageName(); 
-        const imageRef = ref(storage, `puppytots/puppyImages/${randomName} `)
-        uploadBytes(imageRef, file).then((snapshot) => {
-        getDownloadURL(snapshot.ref).then((url) => {
-            setImageUrl(url.toString())
+        const imageRef = ref(storage, `puppytots/puppyImages/${randomName} `);
+        try{
+            uploadBytes(imageRef, file).then((snapshot) => {
+            getDownloadURL(snapshot.ref).then((url) => {
+                console.log("URL IMAGE", url)
+                    setImageUrl(url); 
+                })
             })
-        })
+        }catch(error:any){
+            console.error("Error loading image to storage")
+        }
+        // let urlSet = await getDownloadURL(ref(storage, `puppytots/puppyImages/${randomName} `)); 
+        // setImageUrl(urlSet)
+        
+        
+        // .then((snapshot) => {
+        // getDownloadURL(snapshot.ref).then((url) => {
+        //     urlSet = url;
+        //     })
+        // })
+        // return urlSet;
     }
 
+    useEffect(() => {
+
+        if(imageUrl){
+            let birthDate;
+            if(birth !== null){
+                birthDate = birth?.toDate(); 
+            }else {
+                birthDate = new Date(); 
+            }
+            console.log("CREATING NEW PUPPY" + breed + motherName + fatherName+ birthDate + sex + price + available+imageUrl); 
+            
+            let newPup = {breed:breed, motherName:motherName, fatherName:fatherName, birth:birthDate, sex:sex, price:price, available:available, imageName: imageUrl }; 
+
+            // formData.append('puppyData', JSON.stringify(newPup)); 
+
+            // formData.append('image', file); 
+            
+            createNewPuppy(newPup); 
+        }
+
+
+    }, [imageUrl])
 
     async function handleOnSubmit(e:React.SyntheticEvent){
         e.preventDefault(); 
-        
+        console.log("FileName", file)
+        await uploadFile(); 
         // const formData = new FormData(); 
         // formData.append
-        uploadFile(); 
-
-        console.log("Image url:" + imageUrl)
-
-        let birthDate;
-        if(birth !== null){
-            birthDate = birth?.toDate(); 
-        }else {
-            birthDate = new Date(); 
-        }
-        console.log("CREATING NEW PUPPY" + breed + motherName + fatherName+ birthDate + sex + price + available); 
+        // setImageUrl(imageLocation);
+        // let birthDate;
+        // if(birth !== null){
+        //     birthDate = birth?.toDate(); 
+        // }else {
+        //     birthDate = new Date(); 
+        // }
+        // console.log("CREATING NEW PUPPY" + breed + motherName + fatherName+ birthDate + sex + price + available+imageUrl); 
         
-        let newPup = {breed:breed, motherName:motherName, fatherName:fatherName, birth:birthDate, sex:sex, price:price, available:available, imageName: imageUrl }; 
+        // let newPup = {breed:breed, motherName:motherName, fatherName:fatherName, birth:birthDate, sex:sex, price:price, available:available, imageName: imageUrl }; 
 
-        // formData.append('puppyData', JSON.stringify(newPup)); 
+        // // formData.append('puppyData', JSON.stringify(newPup)); 
 
-        // formData.append('image', file); 
+        // // formData.append('image', file); 
         
-        await createNewPuppy(newPup); 
+        // await createNewPuppy(newPup); 
         // await axios.post("/api/puppies", formData, {headers: {'Content-Type': 'multipart/form-data'}})
     }
 

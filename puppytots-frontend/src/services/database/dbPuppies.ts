@@ -24,12 +24,14 @@ export const createPuppy = async(puppyData: Puppy): Promise<Puppy> => {
     }
 }; 
 
-export const deletePuppy = async(puppyId: string): Promise<void> => {
+export const deletePuppy = async(puppyId: string) => {
     try{
-        await dbAxiosInstance.delete(`/puppies/${puppyId}`); 
+        let response = await dbAxiosInstance.delete(`/puppies/${puppyId}`); 
         console.log("Successfully deleted"); 
+        return response;
     }catch(error:any){
         console.error("Error failed to delete data", error); 
         throw error;
     }
 }; 
+

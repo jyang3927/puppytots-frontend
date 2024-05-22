@@ -6,19 +6,22 @@ import reportWebVitals from './reportWebVitals';
 import { BrowserRouter } from 'react-router-dom';
 import { PuppyProvider } from './context/PuppyContext';
 import { DogProvider } from './context/DogContext';
+import { AuthProvider } from './context/AuthContext';
 
 const root = ReactDOM.createRoot(
   document.getElementById('root') as HTMLElement
 );
 root.render(
   <React.StrictMode>
-    <DogProvider>
-      <PuppyProvider>
-        <BrowserRouter>
-          <App />
-        </BrowserRouter>
-      </PuppyProvider>
-    </DogProvider>
+    <AuthProvider>
+      <DogProvider>
+        <PuppyProvider>
+          <BrowserRouter>
+            <App />
+          </BrowserRouter>
+        </PuppyProvider>
+      </DogProvider>
+    </AuthProvider>
   </React.StrictMode>
 );
 

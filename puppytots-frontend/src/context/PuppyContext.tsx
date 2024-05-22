@@ -1,11 +1,12 @@
 import {ReactNode, createContext, useState, useEffect} from "react"; 
 import { Puppy } from "../models/Puppy";
-import { createPuppy, getAllPuppiesByBreed } from "../services/database/dbPuppies";
+import { createPuppy, deletePuppy, getAllPuppiesByBreed } from "../services/database/dbPuppies";
 
 interface PuppyContextType{
     setPuppyByBreed:(breed:string) => Promise<Puppy[]>; 
     setBreedName:(breed:string) => void; 
     createNewPuppy:(puppyInfo:Puppy) => Promise<Puppy>;
+    deletePuppyProfile:(puppyId:string) => Promise<void>; 
     puppies:Puppy[] | null; 
     setNewPuppy: (newPup:Puppy) => void; 
     breedName: string | null;
@@ -21,6 +22,7 @@ export const PuppyProvider = ({children}: PuppyContextProviderProps) => {
     const [puppies, setPuppies] = useState<Puppy[] | null>(null); 
     const [breedName, setBreedName] = useState<string | null>(null); 
     const [newPuppy, setNewPuppy] = useState<Puppy | null>(null); 
+    const [puppyDeleted, setPuppyDeleted] = useState(null); 
 
     useEffect(() => {
         if(breedName !== null){
@@ -28,7 +30,7 @@ export const PuppyProvider = ({children}: PuppyContextProviderProps) => {
             setPuppyByBreed(breedName); 
             console.log("puppies after breedName changed: " + puppies)
         }
-    }, [breedName, newPuppy]); 
+    }, [breedName, newPuppy, puppyDeleted]); 
 
     const setPuppyByBreed = async(breed:string): Promise<Puppy[]> => {
         try{
@@ -54,8 +56,20 @@ export const PuppyProvider = ({children}: PuppyContextProviderProps) => {
         }
     };
 
+    const deletePuppyProfile = async(puppyId:string) => {
+        try{
+            console.log(puppyId); 
+            let response = await deletePuppy(puppyId); 
+            setPuppyByBreed(breedName!); 
+            return response; 
+        }catch(error:any){
+            console.log("error in Puppy Context Delete"); 
+            return error; 
+        }
+    }
+
     return(
-        <PuppyContext.Provider value={{setPuppyByBreed, createNewPuppy, setBreedName, puppies, setNewPuppy, breedName}}> 
+        <PuppyContext.Provider value={{setPuppyByBreed, createNewPuppy, setBreedName, deletePuppyProfile,puppies, setNewPuppy, breedName}}> 
             {children}
         </PuppyContext.Provider>
     )

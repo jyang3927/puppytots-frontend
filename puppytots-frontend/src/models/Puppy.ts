@@ -1,5 +1,5 @@
 export interface Puppy{
-    id?: string; 
+    _id?: string; 
     breed: string; 
     motherName: string; 
     fatherName: string; 

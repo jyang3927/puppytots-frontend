@@ -4,7 +4,7 @@ import dbAxiosInstance from "../helpers/dbAxiosInstace";
 export const getAllDogs = async(): Promise<Dog[
 ]> => {
     try{
-        const response = await dbAxiosInstance.get(`/ourDogs`); 
+        const response = await dbAxiosInstance.get(`/ourDogs/getDogs`); 
         return response.data; 
     }catch(error:any){
         console.error("Failed to fetch dogs", error); 
@@ -14,7 +14,9 @@ export const getAllDogs = async(): Promise<Dog[
 
 export const createDog = async(dogData: Dog): Promise<Dog> => {
     try{
-        const response = await dbAxiosInstance.post(`/ourDogs`, dogData); 
+        const response = await dbAxiosInstance.post(`/ourDogs/dogPost`, dogData, {headers: {'Cache-Control': 'no-store'
+        }}
+        ); 
         return response.data; 
     }catch(error:any){
         console.error("Failed to create dog profile", error); 

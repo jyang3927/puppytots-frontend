@@ -1,11 +1,18 @@
+import { Button } from "@mui/material";
 import { Puppy } from "../../models/Puppy"
 import "../../styles/puppyCard.css"
+import { usePuppy } from "../../hooks/usePuppy";
+import { useAuth } from "../../hooks/useAuth";
 
 interface PuppyProps{
     puppy: Puppy; 
 }
 
 export function PuppyCard({puppy}: PuppyProps){
+
+    let {deletePuppyProfile} = usePuppy(); 
+    let {user} = useAuth(); 
+
     
     let availablePuppy = () => {
         let setAvailable = "AVAILABLE";
@@ -19,7 +26,6 @@ export function PuppyCard({puppy}: PuppyProps){
     return(
         <div className="PuppyCard">
             <div className="PuppyProfile">
-                <h5></h5>
                 <div className="PuppyDetailsContainer sniglet-regular">
                     <img src={puppy.imageName} className="PuppyImageProfile"/>
                     <div className="PuppyDetails"><span className="PuppyDetailsLabel">Sex: </span>{puppy.sex}</div>
@@ -28,6 +34,7 @@ export function PuppyCard({puppy}: PuppyProps){
                     <div className="PuppyDetails"><span className="PuppyDetailsLabel">Price: </span>${puppy.price}</div>
                     <span className="PuppyDetailsLabel">{availablePuppy()}</span>
                 </div>
+                {user?.email === 'yangjm1287@gmail.com' && <Button variant="contained" size="small" color="secondary" style={{marginBottom:'10px'}} className="PuppyProfileDelete" onClick={() => deletePuppyProfile(puppy._id!)}>Delete Puppy</Button>}
             </div>
         </div>
     )

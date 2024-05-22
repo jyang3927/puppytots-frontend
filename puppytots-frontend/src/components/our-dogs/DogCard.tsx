@@ -9,7 +9,8 @@ export function DogCard({dogInfo}:DogCardProps){
         <div className="DogCard sniglet-regular">
             <h3>{dogInfo.name}</h3>
             <div className="DogCardContainer">
-                <p className="DogCardDetails ">Breed: {dogInfo.breed}</p>
+                <img src={dogInfo.imageUrl} className="DogImageProfile"/>
+                <p className="DogCardDetails">Breed: {dogInfo.breed}</p>
                 <p className="DogCardDetails">Weight: {dogInfo.weight}lbs</p>
                 <p className="DogCardDetails">Details: {dogInfo.details}</p>
             </div>
