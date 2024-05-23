@@ -7,16 +7,16 @@
     display: flex;
     flex-direction: column;
     align-items: center;
-    justify-content: center;
+    justify-content: flex-end;
     color: #811394;
 }
 
 .DogImageProfile{
-    max-width: 100px;
-    max-height: 200px;
+    max-width: 10rem;
+    max-height: 10rem;
     border-radius: 10px;
-    margin-bottom: 5px;
-    object-fit: contain;
+    margin: 20px;
+    object-fit: contain;    
 }
 
 .DogCardContainer{
@@ -35,4 +35,10 @@
 
 .DogCardDetails{
     margin: 2px;
+    font-size: 1rem;
+}
+
+.DogInfoName{
+    margin:7px;
+    font-size: 2rem;
 }

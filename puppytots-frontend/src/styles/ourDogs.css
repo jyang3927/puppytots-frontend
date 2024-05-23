@@ -14,7 +14,7 @@
     width: 100%;
     flex-direction: row;
     flex-wrap: wrap;
-    justify-content: space-between;
+    justify-content: space-evenly;
 }
 
 .MaleDogDisplay{
@@ -26,12 +26,12 @@
 }
 
 .OurDogsContent{
-    margin: 30px;
     display: flex;
     flex-direction: column;
     justify-content: center;
     align-items: center;
-    width: 100%;
+    width: 100vw;
+    margin-top: 10px;
 }
 
 .FormButton{
@@ -39,4 +39,20 @@
     justify-content: center;
     margin-bottom: 20px;
     padding: 0;
+}
+
+.OurDogs{
+    width: 100vw;
+    display: flex;
+    flex-direction: column;
+}
+
+.DogPageHeader{
+    display: flex;
+    justify-content: center;
+    width: 100vw;
+}
+
+.DogHeaderContainer{
+    width: 100vw;
 }

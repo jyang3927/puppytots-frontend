@@ -5,12 +5,12 @@ import '../../styles/puppiesPage.css'
 import { usePuppy } from "../../hooks/usePuppy";
 import { useEffect } from "react";
 import { NewPuppyForm } from "../forms/NewPuppyForm";
-// import { useAuth } from "../../hooks/useAuth";
+import { useAuth } from "../../hooks/useAuth";
 
 export function PuppiesPage(){
 
     const {breed} = useParams(); 
-    // const {user} = useAuth(); 
+    const {user} = useAuth(); 
 
     const {setBreedName, puppies, breedName} = usePuppy(); 
     
@@ -39,7 +39,7 @@ export function PuppiesPage(){
                 <NavBar/>
             </div>
             <div className="AddPuppyButton">
-                {/* {user?.email === 'yangjm1287@gmail.com' && <NewPuppyForm/>} */}
+                {user?.email === 'yangjm1287@gmail.com' && <NewPuppyForm/>}
             </div>
             <div className="PuppyList">
                 {puppies !== null && puppies.map((puppy) => <PuppyCard puppy={puppy}/>)}

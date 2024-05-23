@@ -1,10 +1,11 @@
 import {ReactNode, createContext, useState, useEffect} from "react"; 
 import { Dog } from "../models/Dog";
-import { createDog, getAllDogs } from "../services/database/dbDogs";
+import { createDog, deleteDog, getAllDogs } from "../services/database/dbDogs";
 
 interface DogContextType{
     createNewDog:(newDog:Dog) => Promise<Dog>; 
     getAllOurDogs:() => Promise<Dog[]>;
+    deleteOurDog:(dogId:string) => Promise<void>; 
     setNewDog:(newDog: Dog) => void;
     ourDogsList: Dog[] | null; 
 }
@@ -46,8 +47,19 @@ export const DogProvider = ({children}: DogContextProviderProps) => {
         }
     }; 
 
+
+    const deleteOurDog = async(dogId:string) => {
+        try{
+            let response = await deleteDog(dogId); 
+            getAllOurDogs(); 
+            return response; 
+        }catch(error:any){
+            console.log("error in Dog Context Delete"); 
+            return error; 
+        }
+    }
     return(
-        <DogContext.Provider value={{createNewDog, getAllOurDogs, setNewDog, ourDogsList}}>
+        <DogContext.Provider value={{createNewDog, getAllOurDogs, setNewDog, deleteOurDog, ourDogsList}}>
             {children}
         </DogContext.Provider>
     )

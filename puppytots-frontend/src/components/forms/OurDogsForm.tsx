@@ -83,7 +83,7 @@ export function OurDogsForm(){
             <Modal open={open} onClose={handleClose} >
                 <Box sx={{ position: 'absolute', top: '50%', left: '50%', transform: 'translate(-50%, -50%)', width: 400, bgcolor: 'background.paper', boxShadow: 24, p: 4, overflow:"auto", height: "80%" }}>
                     <form onSubmit={handleSubmit} className="NewDogForm" encType="multipart/form-data">
-                    <h3 style={{textAlign: 'center', marginBottom: "15px", fontSize: '25px', marginTop: '0'}} className="ContactUsTitle sniglet-extrabold">Add New Dog</h3>
+                    <h3 style={{textAlign: 'center', marginBottom: "15px", fontSize: '3rem', marginTop: '0'}} className="ContactUsTitleForm sniglet-extrabold">Add New Dog</h3>
                     <TextField label="Name" variant="outlined" margin="normal" color="secondary" size="small" value={name} onChange={(e) => setName(e.target.value)}/>
                     <FormLabel>Gender</FormLabel>
                     <RadioGroup row value={sex} onChange={handleChangeSex}>

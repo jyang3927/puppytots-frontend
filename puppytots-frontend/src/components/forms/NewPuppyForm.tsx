@@ -161,7 +161,7 @@ export function NewPuppyForm(){
             <Modal open={open} onClose={handleClose} >
                 <Box sx={{ position: 'absolute', top: '50%', left: '50%', transform: 'translate(-50%, -50%)', width: 350, bgcolor: 'background.paper', boxShadow: 24, p: 4, overflow:"auto", height: "80%"}}>
                     <form onSubmit={handleOnSubmit} className="NewDogForm" encType="multipart/form-data">
-                    <h3 style={{textAlign: 'center', marginBottom: "15px", fontSize: '2rem', marginTop: '0'}} className="ContactUsTitleForm sniglet-extrabold">Add New Puppy</h3>
+                    <h3 style={{textAlign: 'center', marginBottom: "15px", fontSize: '3rem', marginTop: '0'}} className="ContactUsTitleForm sniglet-extrabold">Add New Puppy</h3>
                     <FormLabel>Date of Birth</FormLabel>                  
                     <LocalizationProvider dateAdapter={AdapterDayjs}>
                         <DatePicker value={birth} onChange={(newValue) => setBirth(newValue)} />

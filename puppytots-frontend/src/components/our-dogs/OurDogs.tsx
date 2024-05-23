@@ -37,8 +37,8 @@ export function OurDogs(){
 
     return(
         <div className="OurDogs">
-            <div>
-                <div className="Header">
+            <div className="DogHeaderContainer">
+                <div className="DogPageHeader">
                     <img className="PawPrint" src="/images/two-dog-pawprints-svgrepo-com (7).svg"/>
                     <h1 className="WelcomeHeader sniglet-extrabold ">Our Dogs</h1>
                     <img className="PawPrint" src="/images/two-dog-pawprints-svgrepo-com (6).svg"/>

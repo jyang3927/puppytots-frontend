@@ -24,10 +24,11 @@ export const createDog = async(dogData: Dog): Promise<Dog> => {
     }
 };
 
-export const deleteDog = async(dogId: string): Promise<void> => {
+export const deleteDog = async(dogId: string) => {
     try{
-        await dbAxiosInstance.delete(`/ourDogs/${dogId}`); 
+        let response = await dbAxiosInstance.delete(`/ourDogs/${dogId}`); 
         console.log("Successfully deleted"); 
+        return response;
     } catch(error: any){
         console.error("Error failed to delete data", error); 
         throw error; 
