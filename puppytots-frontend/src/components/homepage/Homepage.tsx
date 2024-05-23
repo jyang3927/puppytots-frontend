@@ -17,14 +17,6 @@ export function HomePage(){
             </div>
             <NavBar/>
             <div>
-            <Container>
-            <form className="loginSection">
-                <FormControl sx={{ width: '20ch' }}>
-                {user? <Button onClick={signOut} variant="contained" color="secondary">Sign Out</Button> : 
-                       <Button onClick={signIn} variant="contained" color="secondary"> Breeder Sign In</Button>}
-                </FormControl>
-            </form>
-            </Container>
         </div>
         </div>
     )
