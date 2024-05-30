@@ -38,26 +38,21 @@ export function OurDogs(){
     return(
         <div className="OurDogs">
             <div className="DogHeaderContainer">
-                <div className="DogPageHeader">
-                    <img className="PawPrint" src="/images/two-dog-pawprints-svgrepo-com (7).svg"/>
-                    <h1 className="WelcomeHeader sniglet-extrabold ">Our Dogs</h1>
-                    <img className="PawPrint" src="/images/two-dog-pawprints-svgrepo-com (6).svg"/>
-                </div>
                 <NavBar/>
             </div>
             <div className="OurDogsContent"> 
-                <div className="FormButton">
+                {/* <div className="FormButton">
                     <OurDogsForm/>
                     {/* {user?.email === 'yangjm1287@gmail.com' && <OurDogsForm/>} */}
-                </div>
+                {/* </div> */}
                 <Container sx={{margin: 'auto'}}>
-                    <h4 className="FemaleHeader sniglet-extrabold">FEMALES</h4>
+                    <h4 className="FemaleHeader nunito">Our Females</h4>
                     <div className="FemaleDogDisplay">
                         {femaleDogs?.map(femaleDog => <DogCard dogInfo={femaleDog}/>)}
                     </div>
                 </Container>
                 <Container>
-                    <h4 className="MaleHeader sniglet-extrabold">MALES</h4>
+                    <h4 className="MaleHeader nunito">Our Males</h4>
                     <div className="MaleDogDisplay">
                         {maleDogs?.map(maleDog => <DogCard dogInfo={maleDog}/>)}
                     </div>

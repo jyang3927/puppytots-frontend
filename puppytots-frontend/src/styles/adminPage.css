@@ -1,0 +1,10 @@
+.AdminLoginSection{
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    flex-direction: column;
+}
+
+.AdminIcon{
+    max-height: 4rem;
+}

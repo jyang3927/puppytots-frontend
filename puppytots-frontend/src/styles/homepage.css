@@ -1,38 +1,85 @@
 .HomePage{
     display: flex;
     flex-direction: column;
+    height: 100vh;
 }
 
-.WelcomeHeader{
-    color: #9c27b0; 
-    font-size: 30px;
-    margin: 20px;
+.BackgroundImage{
+    background-image: url("../../public/images/vecteezy_dog-or-cat-footprints-vector-paw-print-vector-dog_5863122.jpg");
+    /* background-size: contain; */
+    opacity: 0.9;
+    /* z-index: -1;  */
 }
 
-.sniglet-regular {
-    font-family: "Sniglet", system-ui;
-    font-weight: 400;
-    font-style: normal;
-}
-  
-.sniglet-extrabold {
-    font-family: "Sniglet", system-ui;
-    font-weight: 800;
-    font-style: normal;
-}
-  
-
-.PawPrint{
-    height: 50px;
+.HomeSpanIcon{
+    margin: 0;
+    padding: 0;
+    height: 3rem;
+    padding-right: .5rem;
 }
 
-.Header{
+.homePageWelcome{
+    color: #383838; 
+    font-size: 4.5rem;
+    font-weight: 700;
     display: flex;
+    flex-direction: column;
     justify-content: center;
-    align-items: center;
+    align-items: flex-start;
+    margin-bottom: 0;
 }
 
 .loginSection{
     display: flex;
     justify-content: center;
 }
+
+.homePagePicture{
+    max-height: 40rem;
+    border-radius: 1050px;
+    border: 10px solid #d9d3b0;
+    box-shadow: 2px 2px 4px 4px rgba(0, 0, 0, 0.2);
+}
+
+.HomePageMain{
+    display: flex;
+    justify-content: space-evenly;
+    height: 100%;
+    padding-top: 5rem;
+    color: #383838;
+    border-bottom: .5em double #d9d3b0;
+    padding-bottom: 6em;
+    margin-bottom: 2em;
+}
+
+.HomePageSpan{
+    font-size: 1.85em;
+    margin-top: .6em;
+}
+
+.HomePageLeft{
+    margin-top: 3em;
+}
+
+.puppyTotsHighlight{
+    font-weight: 1000;
+    font-size: 6.5rem;
+    color: #9e7d41
+}
+
+.HomepagePastPuppies{
+    font-size: 2rem;
+    font-weight: 800;
+    color: #383838;
+    text-align: center;
+}
+
+.PuppytotsColor{
+    color: #9e7d41;
+}
+
+.PuppytotsCarouselSpan {
+    font-weight: 1000;
+    font-size: 2.5rem;
+}
+/* TESTING */

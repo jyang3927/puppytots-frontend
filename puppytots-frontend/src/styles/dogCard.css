@@ -1,5 +1,5 @@
 .DogCard{
-    background-color: #E0C2FF;
+    background-color: #E3DDB9;
     width: 25vw;
     height: auto;
     margin: 10px;
@@ -8,7 +8,7 @@
     flex-direction: column;
     align-items: center;
     justify-content: flex-end;
-    color: #811394;
+    color: #515151;
 }
 
 .DogImageProfile{

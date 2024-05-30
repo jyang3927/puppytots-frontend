@@ -4,12 +4,58 @@
     align-items: center;
     width: 100%;
     height: 100%;
-    background-color: #E0C2FF;
+    background-color: #EDE8D1;
+    flex: 10;
 }
 
-.navigation{
+.NavigationContainer{
+    background-color: #EDE8D1;
+    color: #515151;
     display: flex;
-    align-items: center;
     justify-content: center;
-    height: 30px;
+    align-items: center;
+    height: 100%;
+}
+
+.Header{
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.WelcomeHeader{
+    color: #515151; 
+    font-size: 3rem;
+    margin: 20px;
+    font-weight: 700;
+}
+
+.dogFace{
+    height: 2.6rem;
+    justify-content: center;
+    align-items: center;
+    text-align: center;
+}
+
+.PuppytotsLogo{
+    font-size: .8rem;
+    justify-content: center;
+    align-items: center;
+    height: 100%;
+    display: flex;
+    flex-direction: row;
+    padding-bottom: .35rem;
+}
+
+
+.LogoSection{
+    flex: 1;
+    justify-content: center;
+    align-items: center;
+    flex-direction: row;
+    text-align: center;
+}
+
+.AdminPageLink{
+    flex: 1;
 }

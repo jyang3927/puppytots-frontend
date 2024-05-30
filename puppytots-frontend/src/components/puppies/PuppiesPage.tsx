@@ -31,16 +31,11 @@ export function PuppiesPage(){
     return(
         <div className="PuppiesPage">
             <div className="PuppiesPageHeader">
-                <div className="PuppyTitle"> 
-                    <img className="PawPrint" src="/images/two-dog-pawprints-svgrepo-com (6).svg"/>
-                    <h1 className="Breed sniglet-extrabold">{breedType()}</h1>
-                    <img className="PawPrint" src="/images/two-dog-pawprints-svgrepo-com (7).svg"/>
-                </div>
                 <NavBar/>
             </div>
-            <div className="AddPuppyButton">
+            {/* <div className="AddPuppyButton">
                 {user?.email === 'yangjm1287@gmail.com' && <NewPuppyForm/>}
-            </div>
+            </div> */}
             <div className="PuppyList">
                 {puppies !== null && puppies.map((puppy) => <PuppyCard puppy={puppy}/>)}
             </div>
