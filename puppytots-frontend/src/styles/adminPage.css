@@ -5,6 +5,26 @@
     flex-direction: column;
 }
 
+.AdminLoginHeader{
+    font-weight: 1000;
+    font-size: 3rem;
+    padding-top: 1rem;
+    color: #9e7d41;
+}
+
 .AdminIcon{
-    max-height: 4rem;
+    max-height: 7rem;
+    margin: 1rem 0 3rem 0; 
+}
+
+.AdminFormOptions{
+    display: flex;
+    flex-direction: row;
+    justify-content: center;
+    align-items: center;
+    margin-top: 3rem;
+}
+
+.AddFormOption{
+    margin: 1rem;
 }

@@ -1,12 +1,13 @@
 import {ReactNode, createContext, useState, useEffect} from "react"; 
 import { Puppy } from "../models/Puppy";
-import { createPuppy, deletePuppy, getAllPuppiesByBreed } from "../services/database/dbPuppies";
+import { createPuppy, deletePuppy, getAllPuppiesByBreed, updatePuppy } from "../services/database/dbPuppies";
 
 interface PuppyContextType{
     setPuppyByBreed:(breed:string) => Promise<Puppy[]>; 
     setBreedName:(breed:string) => void; 
     createNewPuppy:(puppyInfo:Puppy) => Promise<Puppy>;
     deletePuppyProfile:(puppyId:string) => Promise<void>; 
+    editPuppyInfo:(puppy:Puppy, puppyId:string) => Promise<Puppy>;
     puppies:Puppy[] | null; 
     setNewPuppy: (newPup:Puppy) => void; 
     breedName: string | null;
@@ -22,6 +23,8 @@ export const PuppyProvider = ({children}: PuppyContextProviderProps) => {
     const [puppies, setPuppies] = useState<Puppy[] | null>(null); 
     const [breedName, setBreedName] = useState<string | null>(null); 
     const [newPuppy, setNewPuppy] = useState<Puppy | null>(null); 
+    const [puppyUpdated, setPuppyUpdated] = useState<Puppy | null>(null); 
+
     const [puppyDeleted, setPuppyDeleted] = useState(null); 
 
     useEffect(() => {
@@ -30,7 +33,7 @@ export const PuppyProvider = ({children}: PuppyContextProviderProps) => {
             setPuppyByBreed(breedName); 
             console.log("puppies after breedName changed: " + puppies)
         }
-    }, [breedName, newPuppy, puppyDeleted]); 
+    }, [breedName, newPuppy, puppyDeleted, puppyUpdated]); 
 
     const setPuppyByBreed = async(breed:string): Promise<Puppy[]> => {
         try{
@@ -56,6 +59,17 @@ export const PuppyProvider = ({children}: PuppyContextProviderProps) => {
         }
     };
 
+    const editPuppyInfo = async(puppy:Puppy, puppyId:string): Promise<Puppy> => {
+        try{
+            let response = await updatePuppy(puppy, puppyId); 
+            setPuppyUpdated(response); 
+            return response; 
+        }catch(error:any){
+            console.log("error in Puppy Context Patch"); 
+            return error; 
+        }
+    }
+
     const deletePuppyProfile = async(puppyId:string) => {
         try{
             console.log(puppyId); 
@@ -69,7 +83,7 @@ export const PuppyProvider = ({children}: PuppyContextProviderProps) => {
     }
 
     return(
-        <PuppyContext.Provider value={{setPuppyByBreed, createNewPuppy, setBreedName, deletePuppyProfile,puppies, setNewPuppy, breedName}}> 
+        <PuppyContext.Provider value={{setPuppyByBreed, createNewPuppy, setBreedName, deletePuppyProfile, editPuppyInfo, puppies, setNewPuppy, breedName}}> 
             {children}
         </PuppyContext.Provider>
     )

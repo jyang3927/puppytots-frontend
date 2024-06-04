@@ -7,6 +7,7 @@ interface AuthContextType {
   signIn: () => Promise<void>;
   signOut: () => Promise<void>;
   isAuthInitializing: boolean;
+  isBreeder: boolean; 
 }
 
 export const AuthContext = createContext<AuthContextType | undefined>(
@@ -21,6 +22,8 @@ export const AuthProvider = ({ children }: AuthProviderProps) => {
   //user state
   const [user, setUser] = useState<User | null>(null);
   const [isAuthInitializing, setIsAuthInitializing] = useState<boolean>(true);
+
+  const [isBreeder, setIsBreeder] = useState<boolean>(false); 
 
   const signIn = async () => {
     const provider = new GoogleAuthProvider();
@@ -41,14 +44,19 @@ export const AuthProvider = ({ children }: AuthProviderProps) => {
 
   useEffect(() => {
     const unsubscribe = auth.onAuthStateChanged((currentUser) => {
+      console.log(currentUser)
       setUser(currentUser);
-      setIsAuthInitializing(false)
+      setIsAuthInitializing(false); 
+      console.log("setUser", user)
+      if(user?.email === "yangjm1287@gmail.com"){
+        setIsBreeder(true); 
+      }
     });
     return () => unsubscribe();
-  }, []);
+  }, [user]);
 
   return (
-    <AuthContext.Provider value={{ user, signIn, signOut, isAuthInitializing }}>
+    <AuthContext.Provider value={{ user, signIn, signOut, isAuthInitializing, isBreeder }}>
       {children}
     </AuthContext.Provider>
   );

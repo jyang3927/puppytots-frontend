@@ -1,14 +1,4 @@
-.PuppyCard{
-    background-color: #E0C2FF;
-    width: 25vw;
-    height: auto;
-    margin: 20px;
-    border-radius: 10px;
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    justify-content: center;
-}
+
 
 .PuppyDetailsContainer{
     display: flex;
@@ -23,19 +13,6 @@
     padding: 15px;
 }
 
-.PuppyDetails{
-    margin: 3px;
-    font-size: .75rem;
-    font-weight: 100;
-    color: #a62ac2;
-
-}
-
-.PuppyDetailsLabel{
-    font-weight: bolder;
-    font-size: .8rem;
-    color: #9c11bb;
-}
 
 .PuppyImageProfile{
     max-width: 10rem;
@@ -47,4 +24,12 @@
 
 .PuppyProfileDelete{
     margin: 5px;
+}
+
+.LabelPuppy{
+    font-weight: 1000;
+}
+
+.PuppyCardContent{
+    font-size: em;
 }

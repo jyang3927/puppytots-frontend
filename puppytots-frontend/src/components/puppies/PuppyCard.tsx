@@ -1,4 +1,4 @@
-import { Button, Typography } from "@mui/material";
+import { Button, TextField, Typography } from "@mui/material";
 import { Puppy } from "../../models/Puppy"
 import "../../styles/puppyCard.css"
 import { usePuppy } from "../../hooks/usePuppy";
@@ -12,7 +12,7 @@ import CardMedia from '@mui/material/CardMedia';
 import CardContent from '@mui/material/CardContent';
 import CardActions from '@mui/material/CardActions';
 import Collapse from '@mui/material/Collapse';
-import ExpandMoreIcon from '@mui/icons-material/ExpandMore';
+import ExpandCircleDownIcon from '@mui/icons-material/ExpandCircleDown';
 import IconButton, { IconButtonProps } from '@mui/material/IconButton';
 import { useState } from "react";
 
@@ -37,10 +37,8 @@ const ExpandMore = styled((props: ExpandMoreProps) => {
 
 export function PuppyCard({puppy}: PuppyProps){
 
-    // let {deletePuppyProfile} = usePuppy(); 
-    // let {user} = useAuth(); 
-
-    
+    let {deletePuppyProfile} = usePuppy(); 
+    let {user, isBreeder} = useAuth(); 
     // let availablePuppy = () => {
     //     let setAvailable = "AVAILABLE";
     //     if(puppy.available === false){
@@ -50,82 +48,101 @@ export function PuppyCard({puppy}: PuppyProps){
     //     return setAvailable;
     // }
 
-    // return(
-    //     <div className="PuppyCard">
-
-            {/* <div className="PuppyProfile">
-                <img src={puppy.imageName} className="PuppyImageProfile"/>
-                <div className="PuppyDetailsContainer sniglet-regular">
-                    {/* <img src={puppy.imageName} className="PuppyImageProfile"/> */}
-                    {/* <div className="PuppyDetails"><span className="PuppyDetailsLabel">Sex: </span>{puppy.sex}</div>
-                    <div className="PuppyDetails"><span className="PuppyDetailsLabel">Mother: </span>{puppy.motherName}</div>
-                    <div className="PuppyDetails"><span className="PuppyDetailsLabel">Father: </span>{puppy.fatherName}</div>
-                    <div className="PuppyDetails"><span className="PuppyDetailsLabel">Price: </span>${puppy.price}</div>
-                    <span className="PuppyDetailsLabel">{availablePuppy()}</span>
-                </div>
-                {user?.email === 'yangjm1287@gmail.com' && <Button variant="contained" size="small" color="secondary" style={{marginBottom:'10px'}} className="PuppyProfileDelete" onClick={() => deletePuppyProfile(puppy._id!)}>Delete Puppy</Button>}
-            </div> */} 
-        // </div>
-    // )
-
     const [expanded, setExpanded] = useState(false);
 
     const handleExpandClick = () => {
       setExpanded(!expanded);
     };
-  
+
+    let puppyBirth = new Date(puppy.birth).toLocaleDateString();
+
+    // TESTING
+    // const [gender, setGender] = useState<string>("");
+
+
     return (
     <div className="nunito">
-      <Card sx={{ maxWidth: 345, backgroundColor:"#CFC2AC", color:"white", marginTop:"3rem"}} className="nunito">
-        <CardHeader
-        //   avatar={
-        //     <Avatar sx={{ bgcolor: red[500] }} aria-label="recipe">
-        //       R
-        //     </Avatar>
-        //   }
-          title={puppy.sex}
-          subheader={puppy.breed.toUpperCase()}
-          sx={{fontFamily:"nunito,sans-serif"}}
-        />
+      {/* <Card sx={{ boxShadow:4, width: 345, backgroundColor:"white", color:"#9e7d41", margin:"2rem 0", borderRadius:"10px"}} className="nunito">
         <CardMedia
           component="img"
-          height="400rem"
+          height="350rem"
+          width="300rem"
           image={puppy.imageName}
           alt="Puppy Image"
+          sx={{borderBottomLeftRadius:"0px", borderBottomRightRadius:"70px", objectFit:"cover" }}
         />
-        <CardContent>
-          <Typography variant="body2" color="text" sx={{fontSize:"1.3rem", fontWeight:"1000", padding:"1rem"}}>
-            Click for more details!
-          </Typography>
-        </CardContent>
         <CardActions disableSpacing>
+          <TextField
+            type="text"
+            id="puppyGender"
+            // disabled={!isEditable}
+            value={puppy.sex}
+            onChange={(e) => setGender(e.target.value)}
+            // onBlur={() => setIsEditable(false)}
+          />
+        <ExpandMore
+            expand={expanded}
+            onClick={handleExpandClick}
+            aria-expanded={expanded}
+            aria-label="show more"
+            sx={{textAlign:"center", display:"flex", flexDirection:"row", justifyContent:"center", margin:"0 0em", alignItems:"center"}}
+          >
+          <ExpandCircleDownIcon fontSize="large" sx={{display:"flex", color:"#d9d3b0"}}/>
+        </ExpandMore>
+
+        </CardActions>
+      </Card>  */}
+      <Card sx={{ boxShadow:4, width: 345, backgroundColor:"white", color:"#9e7d41", margin:"2rem 4rem", borderRadius:"10px"}} className="nunito">
+        <CardMedia
+          component="img"
+          height="350rem"
+          width="300rem"
+          image={puppy.imageName}
+          alt="Puppy Image"
+          sx={{borderBottomLeftRadius:"0px", borderBottomRightRadius:"70px", objectFit:"cover" }}
+        />
+        <CardActions disableSpacing>
+          <div>
+            {/* <TextField value={puppy.sex} sx={{fontWeight: "800", fontFamily:"nunito", fontSize: "1.5rem", color:"#9e7d41"}}>
+            {puppy.sex}
+            </TextField> */}
+            <Typography sx={{fontWeight: "800", fontFamily:"nunito", fontSize: "1.5rem", color:"#9e7d41"}}>
+            {puppy.sex}
+            </Typography>
+            <Typography sx={{fontWeight: "600", fontFamily:"nunito", fontSize: "1rem", color:"#515151"}}>
+            $ {puppy.price}
+            </Typography>
+          </div>
           <ExpandMore
             expand={expanded}
             onClick={handleExpandClick}
             aria-expanded={expanded}
             aria-label="show more"
+            sx={{textAlign:"center", display:"flex", flexDirection:"row", justifyContent:"center", margin:"0 0 0 8em", alignItems:"center"}}
           >
-            <ExpandMoreIcon />
+            <ExpandCircleDownIcon fontSize="large" sx={{display:"flex", color:"#d9d3b0"}}/>
           </ExpandMore>
         </CardActions>
         <Collapse in={expanded} timeout="auto" unmountOnExit>
-          <CardContent>
-            <Typography paragraph>Method:</Typography>
+          <CardContent className="nunito PuppyCardContent">
             <Typography paragraph>
-              Heat 1/2 cup of the broth in a pot until simmering, add saffron and set
-              aside for 10 minutes.
+              <span className="LabelPuppy nunito">Mom:</span> <span className="nunito PuppyCardContent">{puppy.motherName}</span>
             </Typography>
             <Typography paragraph>
-              Mom: {puppy.motherName}
+            <span className="LabelPuppy nunito">Father:</span> <span className="nunito PuppyCardContent">{puppy.fatherName}</span>
             </Typography>
-            <Typography paragraph>
-              Father: {puppy.fatherName}
-            </Typography>
-            <Typography>
-              Birthdate: {puppy.birth.toString()}
+            <Typography className="nunito">
+            <span className="LabelPuppy nunito">Birthdate:</span> <span className="nunito PuppyCardContent">{puppyBirth}</span>
             </Typography>
           </CardContent>
         </Collapse>
+        {/* {user?.email === 'yangjm1287@gmail.com' && 
+        <Button variant="contained" size="small"  
+          sx={{backgroundColor:"#c9b694", color:"white", margin:"1rem 6rem", height:"2.5rem", fontFamily:"nunito, sans-serif", fontWeight:"900", fontSize:".9rem",
+              ':hover': {backgroundColor:'#9e7d41', color:"white"}}} 
+          
+          onClick={() => <PuppyCard puppy={puppy}/>}
+          > Edit Puppy</Button>} */}
       </Card>
     </div>
     )

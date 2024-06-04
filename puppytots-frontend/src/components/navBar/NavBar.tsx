@@ -1,7 +1,6 @@
 import { Link } from "react-router-dom";
 import "../../styles/navBar.css"
 import { Button, FormControl, createTheme } from "@mui/material";
-import { themeOptions } from "../../styles/materialUi/themeColors";
 import { signOut } from "firebase/auth";
 import { useAuth } from "../../hooks/useAuth";
 

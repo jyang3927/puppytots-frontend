@@ -6,11 +6,13 @@ import { usePuppy } from "../../hooks/usePuppy";
 import { useEffect } from "react";
 import { NewPuppyForm } from "../forms/NewPuppyForm";
 import { useAuth } from "../../hooks/useAuth";
+import { PuppyAuthCheck } from "./PuppyAuthCheck";
+import { AdminPuppyCard } from "../admin-page/AdminPuppyCard";
 
 export function PuppiesPage(){
 
     const {breed} = useParams(); 
-    const {user} = useAuth(); 
+    const {user, isBreeder} = useAuth(); 
 
     const {setBreedName, puppies, breedName} = usePuppy(); 
     
@@ -36,8 +38,12 @@ export function PuppiesPage(){
             {/* <div className="AddPuppyButton">
                 {user?.email === 'yangjm1287@gmail.com' && <NewPuppyForm/>}
             </div> */}
+            <div className="breedHeader">
+                <h1 className="nunito breedHeader">- {breedType()}S -</h1>
+            </div>
             <div className="PuppyList">
-                {puppies !== null && puppies.map((puppy) => <PuppyCard puppy={puppy}/>)}
+                {(puppies !== null && isBreeder === true) && puppies.map((puppy) => <AdminPuppyCard puppy={puppy}/>)}
+                {(puppies !== null && isBreeder === false) && puppies.map((puppy) => <PuppyCard puppy={puppy}/>)}
             </div>
         </div>
     )

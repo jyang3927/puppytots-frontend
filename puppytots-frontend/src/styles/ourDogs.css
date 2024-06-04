@@ -1,22 +1,25 @@
 .FemaleHeader{
     color: #9e7d41;
-    font-size: 2rem;
-    font-weight: 800;
-    margin: 7px;
+    font-size: 3rem;
+    font-weight: 1000;
+    text-align: center;
+    margin-top: .7em;
 }
 .MaleHeader{
     color: #9e7d41;
-    font-size: 2rem;
-    font-weight: 800;
-    margin: 7px;
+    font-size: 3rem;
+    font-weight: 1000;
+    text-align: center;
+    margin-top: .7em;
 }
 
 .FemaleDogDisplay{
     display: flex;
     width: 100%;
     flex-direction: row;
+    justify-content: flex-start;
+    align-items: flex-start;
     flex-wrap: wrap;
-    justify-content: space-evenly;
 }
 
 .MaleDogDisplay{
@@ -30,8 +33,8 @@
 .OurDogsContent{
     display: flex;
     flex-direction: column;
-    justify-content: center;
-    align-items: center;
+    justify-content: flex-start;
+    align-items: flex-start;
     width: 100vw;
     margin-top: 10px;
 }
@@ -52,9 +55,14 @@
 .DogPageHeader{
     display: flex;
     justify-content: center;
+    align-items: center;
     width: 100vw;
 }
 
 .DogHeaderContainer{
     width: 100vw;
+}
+
+.MuiCardHeader-title{
+    font-family:"nunito"
 }

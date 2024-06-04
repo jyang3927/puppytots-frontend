@@ -1,4 +1,4 @@
-import { Box, Button, FormControlLabel, FormLabel, Modal, Radio, RadioGroup, TextField, styled } from "@mui/material";
+import { Alert, Box, Button, FormControlLabel, FormLabel, Modal, Radio, RadioGroup, TextField, styled } from "@mui/material";
 import { useEffect, useState } from "react";
 import { DatePicker, LocalizationProvider } from '@mui/x-date-pickers';
 import { AdapterDayjs } from '@mui/x-date-pickers/AdapterDayjs';
@@ -8,6 +8,8 @@ import React from "react";
 import dayjs, { Dayjs } from "dayjs";
 import { ref, uploadBytes, getDownloadURL } from "firebase/storage";
 import { storage } from "../../config/firebaseConfig";
+import CloseIcon from '@mui/icons-material/Close';
+import '../../styles/addNewPuppy.css'
 
 
 const VisuallyHiddenInput = styled('input')({
@@ -118,12 +120,16 @@ export function NewPuppyForm(){
             console.log("CREATING NEW PUPPY" + breed + motherName + fatherName+ birthDate + sex + price + available+imageUrl); 
             
             let newPup = {breed:breed, motherName:motherName, fatherName:fatherName, birth:birthDate, sex:sex, price:price, available:available, imageName: imageUrl }; 
-
-            // formData.append('puppyData', JSON.stringify(newPup)); 
-
-            // formData.append('image', file); 
-            
             createNewPuppy(newPup); 
+            setSex(""); 
+            setBreed(""); 
+            setMotherName(""); 
+            setFatherName(""); 
+            setPrice(0); 
+            setBirth(dayjs(currentdate)); 
+            <Alert title="Success" severity="success">
+            Operation completed successfully.
+            </Alert>
         }
 
 
@@ -157,44 +163,47 @@ export function NewPuppyForm(){
     return(
         <div>
             <div className="NewPuppyForm"> 
-            <Button color="secondary" variant="contained" size="small" onClick={handleOpen}>Add new puppy</Button>
+            <Button  variant="contained" sx={{':hover': {backgroundColor:'white', color:"#ae8f57"},width:"15rem", height:"2.5rem", fontSize:"1.3rem", margin:"0", padding:"0", display:"flex", backgroundColor:'#ae8f57', fontFamily:"nunito, sans-serif", fontWeight:"800"}} onClick={handleOpen}>Add new puppy</Button>
             <Modal open={open} onClose={handleClose} >
-                <Box sx={{ position: 'absolute', top: '50%', left: '50%', transform: 'translate(-50%, -50%)', width: 350, bgcolor: 'background.paper', boxShadow: 24, p: 4, overflow:"auto", height: "80%"}}>
+                <Box sx={{ position: 'absolute', top: '50%', left: '50%', transform: 'translate(-50%, -50%)', width: 400, bgcolor: 'background.paper', boxShadow: 24, p: 4, overflow:"auto", height: "80%"}}>
                     <form onSubmit={handleOnSubmit} className="NewDogForm" encType="multipart/form-data">
-                    <h3 style={{textAlign: 'center', marginBottom: "15px", fontSize: '3rem', marginTop: '0'}} className="ContactUsTitleForm sniglet-extrabold">Add New Puppy</h3>
+                    <h3 style={{textAlign: 'center', marginBottom: "15px", marginTop: '0'}} className="AddNewPuppyHeader nunito">Add New Puppy</h3>
                     <FormLabel>Date of Birth</FormLabel>                  
                     <LocalizationProvider dateAdapter={AdapterDayjs}>
                         <DatePicker value={birth} onChange={(newValue) => setBirth(newValue)} />
                     </LocalizationProvider>                 
-                    <FormLabel>Gender</FormLabel>
+                    <FormLabel sx={{marginTop:".3rem"}}>Gender</FormLabel>
                     <RadioGroup row value={sex} onChange={handleChangeSex}>
-                        <FormControlLabel value="Female" control={<Radio color="secondary" size="small" />} label="Female" />
-                        <FormControlLabel value="Male" control={<Radio color="secondary" size="small" />} label="Male" />
+                        <FormControlLabel value="Female" control={<Radio sx={{color: "#EDE8D1", "&.Mui-checked": {color: "#9e7d41"}}} size="small" />} label="Female" />
+                        <FormControlLabel value="Male" control={<Radio  sx={{color: "#EDE8D1", "&.Mui-checked": {color: "#9e7d41"}}} size="small" />} label="Male" />
                     </RadioGroup>
                     <FormLabel>Breed</FormLabel>
                     <RadioGroup row value={breed} onChange={handleChangeBreed}>
-                        <FormControlLabel value="maltipoo" control={<Radio color="secondary" size="small" />} label="Maltipoo" />
-                        <FormControlLabel value="toy-poodle" control={<Radio color="secondary" size="small" />} label="Toy-Poodle" />
-                        <FormControlLabel value="shihpoo" control={<Radio color="secondary" size="small" />} label="Shihpoo" />
+                        <FormControlLabel value="maltipoo" control={<Radio  sx={{color: "#EDE8D1", "&.Mui-checked": {color: "#9e7d41"}}} size="small" />} label="Maltipoo" />
+                        <FormControlLabel value="toy-poodle" control={<Radio  sx={{color: "#EDE8D1", "&.Mui-checked": {color: "#9e7d41"}}} size="small" />} label="Toy-Poodle" />
+                        <FormControlLabel value="shihpoo" control={<Radio  sx={{color: "#EDE8D1", "&.Mui-checked": {color: "#9e7d41"}}} size="small" />} label="Shihpoo" />
                     </RadioGroup>
-                    <TextField label="Mother's Name" variant="outlined" margin="normal" color="secondary" size="small" value={motherName} onChange={(e) => setMotherName(e.target.value)}/>
-                    <TextField label="Father's Name" variant="outlined" margin="normal" color="secondary" size="small"  value={fatherName} onChange={(e) => setFatherName(e.target.value)} />
-                    <TextField label="Price" variant="outlined" margin="normal" color="secondary" size="small"  value={price} onChange={(e) => setPrice(Number(e.target.value))}/>
+                    <TextField label="Mother's Name" variant="outlined" margin="normal" sx={{" & .MuiOutlinedInput-root.Mui-focused  .MuiOutlinedInput-notchedOutline":{borderColor:"#ae8f57", color:"#ae8f57"},'& .MuiInputLabel-root.Mui-focused':{color:"#ae8f57"} }} size="small" value={motherName} onChange={(e) => setMotherName(e.target.value)}/>
+                    <TextField label="Father's Name" variant="outlined" margin="normal" sx={{" & .MuiOutlinedInput-root.Mui-focused .MuiOutlinedInput-notchedOutline ":{borderColor:"#ae8f57", color:"#ae8f57"},'& .MuiInputLabel-root.Mui-focused':{color:"#ae8f57"} }} size="small"  value={fatherName} onChange={(e) => setFatherName(e.target.value)} />
+                    <TextField label="Price" variant="outlined" margin="normal" sx={{" & .MuiOutlinedInput-root.Mui-focused .MuiOutlinedInput-notchedOutline ":{borderColor:"#ae8f57", color:"#ae8f57"},'& .MuiInputLabel-root.Mui-focused':{color:"#ae8f57"} }} size="small"  value={price} onChange={(e) => setPrice(Number(e.target.value))}/>
                     <Button
                         component="label"
                         role={undefined}
                         variant="outlined"  
                         tabIndex={-1}
                         startIcon={<CloudUpload />}
-                        color="secondary"
+                        sx={{color:"#9e7d41", border:"1px solid #c9b694", margin:".7rem 0", ':hover': {backgroundColor:'white', color:"#ae8f57", border:"1px solid #9e7d41",}}}
                         >
-                        Upload picture
-                        {/* <VisuallyHiddenInput type="file" name="image" onChange={handleOnChange}/> */}
-                        <input type="file" name="image" onChange={handleOnChange}/>
+                        Upload photo
+                        <VisuallyHiddenInput type="file" name="image" onChange={handleOnChange}/>
+                        {/* <input type="file" name="image" className="inputFile" onChange={handleOnChange}/> */}
 
                     </Button>
-                    <Button type="submit" variant="contained" color="secondary" sx={{ mt: 2 }} >Submit</Button>
+                    <Button type="submit" variant="contained"sx={{backgroundColor:"#c9b694", color:"white", margin:".6rem 0", fontFamily:"nunito, sans-serif", fontWeight:"900", ':hover': {backgroundColor:'#9e7d41', color:"white"}}} >Submit</Button>
                     </form>
+                    <Button variant="text" sx={{backgroundColor:"white", borderRadius:"100px", color:"#c9b694", margin:".9rem 0", fontFamily:"nunito, sans-serif", fontWeight:"900", textAlign:"center", marginLeft:"22rem", ':hover': {backgroundColor:'#c9b694', color:"white"}}} onClick={() => handleClose()} >
+                        <CloseIcon />
+                    </Button>
                 </Box>
             </Modal>
         </div>

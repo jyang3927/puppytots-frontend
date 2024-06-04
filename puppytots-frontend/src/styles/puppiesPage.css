@@ -1,7 +1,3 @@
-.Breed{
-    color: #9c27b0;
-    margin: 15px;
-}
 
 .sniglet-regular {
     font-family: "Sniglet", system-ui;
@@ -29,9 +25,21 @@
 .PuppyList{
     display: flex;
     flex-wrap: wrap;
-    justify-content: space-evenly;
+    justify-content: flex-start;
+    align-items: center;
 }
 
 .NewPuppyForm{
-    margin-top: 20px;
+    margin: 20px;
+}
+
+.breedHeader{
+    font-weight: 1000;
+    color: #9e7d41;
+    display: flex;
+    text-align: center;
+    justify-content: center;
+    font-size: 3rem;
+    margin: 0;
+    margin-top: .5em;
 }
