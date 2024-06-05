@@ -7,10 +7,13 @@ import { Dog } from "../../models/Dog";
 import { DogCard } from "./DogCard";
 import { OurDogsForm } from "../forms/OurDogsForm";
 import { useAuth } from "../../hooks/useAuth";
+import { AdminDogCard } from "../admin-page/AdminDogCard";
 
 export function OurDogs(){
 
     const{createNewDog, ourDogsList} = useDog();
+
+    const {isBreeder} = useAuth(); 
     // const{user} = useAuth(); 
 
     const [femaleDogs, setFemaleDogs] = useState<Dog[] | null>(null); 
@@ -48,12 +51,17 @@ export function OurDogs(){
                 <Container sx={{margin: 'auto'}}>
                     <h4 className="FemaleHeader nunito">Our Females</h4>
                     <div className="FemaleDogDisplay">
-                        {femaleDogs?.map(femaleDog => <DogCard dogInfo={femaleDog}/>)}
+                        { isBreeder === true ? femaleDogs?.map(femaleDog => <AdminDogCard dog={femaleDog}/>)
+                        : femaleDogs?.map(femaleDog => <DogCard dogInfo={femaleDog}/>)
+                        }
                     </div>
                 </Container>
                 <Container>
                     <h4 className="MaleHeader nunito">Our Males</h4>
                     <div className="MaleDogDisplay">
+                        { isBreeder === true ? maleDogs?.map(maleDog => <AdminDogCard dog={maleDog}/>)
+                        : maleDogs?.map(maleDog => <DogCard dogInfo={maleDog}/>)
+                        }
                         {maleDogs?.map(maleDog => <DogCard dogInfo={maleDog}/>)}
                     </div>
                 </Container>

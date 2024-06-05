@@ -24,6 +24,16 @@ export const createDog = async(dogData: Dog): Promise<Dog> => {
     }
 };
 
+export const updateDog = async(dog:Dog, dogId:string): Promise<Dog> => {
+    try{
+        let response = await dbAxiosInstance.patch(`/dogs/update/${dogId}`, dog); 
+        return response.data;
+    }catch(error:any){
+        console.error("Failed to update puppy profile", error.response.data); 
+        throw error; 
+    }
+}; 
+
 export const deleteDog = async(dogId: string) => {
     try{
         let response = await dbAxiosInstance.delete(`/ourDogs/${dogId}`); 

@@ -28,7 +28,13 @@ export const AuthProvider = ({ children }: AuthProviderProps) => {
   const signIn = async () => {
     const provider = new GoogleAuthProvider();
     try {
-      await signInWithPopup(auth, provider);
+      let result = await signInWithPopup(auth, provider);
+      // await signInWithPopup(auth, provider);
+      setUser(result.user)
+      console.log("SET USER DURING SIGN OUT", result.user)
+      if(result.user.email === "yangjm1287@gmail.com"){
+        setIsBreeder(true); 
+      }
     } catch (error: any) {
       console.log("Sign in Failed", error);
     }
@@ -37,23 +43,40 @@ export const AuthProvider = ({ children }: AuthProviderProps) => {
   const signOut = async () => {
     try {
       await auth.signOut();
+      if(user?.email === "yangjm1287@gmail.com"){
+        setIsBreeder(false); 
+      }
+      setUser(null)  
     } catch (error: any) {
       console.log("Error signing out", error);
     }
   };
 
+  // useEffect(() => {
+  //   const unsubscribe = auth.onAuthStateChanged((currentUser) => {
+  //     console.log(currentUser)
+  //     setUser(currentUser);
+  //     setIsAuthInitializing(false); 
+  //     console.log("setUser", user)
+  //     if(user?.email === "yangjm1287@gmail.com"){
+  //       setIsBreeder(true); 
+  //     }
+  //   });
+  //   return () => unsubscribe();
+  // }, []);
+
+  // whenever the component re-renders, set the user as to what it was
   useEffect(() => {
-    const unsubscribe = auth.onAuthStateChanged((currentUser) => {
-      console.log(currentUser)
-      setUser(currentUser);
-      setIsAuthInitializing(false); 
-      console.log("setUser", user)
-      if(user?.email === "yangjm1287@gmail.com"){
+      const unsubscribe = auth.onAuthStateChanged((currentUser) => {
+          setUser(currentUser); 
+          console.log("USE EFFECT SET CURRENT USER", user)
+          setIsAuthInitializing(false); 
+          if(user?.email === "yangjm1287@gmail.com"){
         setIsBreeder(true); 
       }
-    });
-    return () => unsubscribe();
-  }, [user]);
+      }); 
+      return () => unsubscribe(); 
+  }, []); 
 
   return (
     <AuthContext.Provider value={{ user, signIn, signOut, isAuthInitializing, isBreeder }}>

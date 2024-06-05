@@ -80,6 +80,7 @@ export function OurDogsForm(){
         if(imageUrl){
             let newDog = {breed:breed, sex:sex, name:name, weight:weight, details:details, imageUrl:imageUrl}; 
             createNewDog(newDog);
+            handleClose(); 
         }
         
     },[imageUrl]) 
@@ -112,7 +113,7 @@ export function OurDogsForm(){
                         <FormControlLabel value="shihpoo" control={<Radio  sx={{color: "#EDE8D1", "&.Mui-checked": {color: "#9e7d41"}}} size="small" />} label="Maltipoo" />
                     </RadioGroup>
                     <TextField label="Weight" variant="outlined" margin="normal" size="small" sx={{" & .MuiOutlinedInput-root.Mui-focused  .MuiOutlinedInput-notchedOutline":{borderColor:"#ae8f57", color:"#ae8f57"},'& .MuiInputLabel-root.Mui-focused':{color:"#ae8f57"} }} value={weight} onChange={(e) => setWeight(Number(e.target.value))} />
-                    <TextField label="Details" type="text" variant="outlined" margin="normal" size="small" sx={{" & .MuiOutlinedInput-root.Mui-focused .MuiOutlinedInput-notchedOutline ":{borderColor:"#ae8f57", color:"#ae8f57"},'& .MuiInputLabel-root.Mui-focused':{color:"#ae8f57"} }} multiline value={details} onChange={(e) => setDetails(e.target.value)}/>
+                    <TextField label="Details" type="text" variant="outlined" margin="normal" size="small" sx={{" & .MuiOutlinedInput-root.Mui-focused .MuiOutlinedInput-notchedOutline ":{borderColor:"#ae8f57", color:"#ae8f57"},'& .MuiInputLabel-root.Mui-focused':{color:"#ae8f57"} }} multiline={true} rows={2} value={details} onChange={(e) => setDetails(e.target.value)}/>
                     <Button
                         component="label"
                         role={undefined}

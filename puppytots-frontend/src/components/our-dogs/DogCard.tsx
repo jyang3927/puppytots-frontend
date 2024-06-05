@@ -99,13 +99,13 @@ export function DogCard({dogInfo}:DogCardProps){
             </Typography>
           </CardContent>
         </Collapse>
-        {user?.email === 'yangjm1287@gmail.com' && 
+        {/* {user?.email === 'yangjm1287@gmail.com' && 
         <Button variant="contained" size="small"  
           sx={{backgroundColor:"#c9b694", color:"white", margin:"1rem 6rem", height:"2.5rem", fontFamily:"nunito, sans-serif", fontWeight:"900", fontSize:".9rem",
               ':hover': {backgroundColor:'#9e7d41', color:"white"}}} 
           
           onClick={() => deleteOurDog(dogInfo._id!)}
-          > Edit Dog</Button>}
+          > Edit Dog</Button>} */}
       </Card>
     </div>
     )

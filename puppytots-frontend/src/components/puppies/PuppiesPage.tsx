@@ -14,7 +14,7 @@ export function PuppiesPage(){
     const {breed} = useParams(); 
     const {user, isBreeder} = useAuth(); 
 
-    const {setBreedName, puppies, breedName} = usePuppy(); 
+    const {setBreedName, puppies, breedName, puppyUpdated} = usePuppy(); 
     
     useEffect(() => {
         if(breed !== undefined){
@@ -22,7 +22,7 @@ export function PuppiesPage(){
             console.log("breedName: " + breedName); 
             console.log("puppieslist: " + puppies)
         }
-    }, [breed])
+    }, [breed, puppyUpdated])
 
     const breedType = () => {
         let breedTitle = breed?.replace("-", " "); 

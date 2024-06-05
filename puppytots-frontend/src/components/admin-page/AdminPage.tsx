@@ -8,7 +8,7 @@ import '../../styles/adminPage.css'
 
 export function AdminPage(){
 
-    const {signIn, signOut, user} = useAuth(); 
+    const {isBreeder, signIn, signOut, user} = useAuth(); 
 
     return(
         <div className="AdminPage"> 
@@ -23,10 +23,10 @@ export function AdminPage(){
             </form>
             <div className="AdminFormOptions"> 
                 <div className="AddFormOption">
-                    {user?.email === 'yangjm1287@gmail.com' && <NewPuppyForm/>}
+                    {isBreeder === true && <NewPuppyForm/>}
                 </div>
                 <div className="AddFormOption">
-                {user?.email === 'yangjm1287@gmail.com' && <OurDogsForm/>}
+                {isBreeder === true && <OurDogsForm/>}
                 </div>
             </div>
         </div>

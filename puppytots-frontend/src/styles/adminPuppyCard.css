@@ -1,3 +1,8 @@
 .AdminPuppyCardFormLabels{
     margin: 1rem 0; 
 }
+
+.AdminPuppyFormButtons{
+    display: flex;
+    flex-direction: row;
+}

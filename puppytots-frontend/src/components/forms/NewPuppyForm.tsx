@@ -127,9 +127,7 @@ export function NewPuppyForm(){
             setFatherName(""); 
             setPrice(0); 
             setBirth(dayjs(currentdate)); 
-            <Alert title="Success" severity="success">
-            Operation completed successfully.
-            </Alert>
+            handleClose(); 
         }
 
 

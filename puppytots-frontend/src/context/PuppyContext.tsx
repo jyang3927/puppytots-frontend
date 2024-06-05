@@ -10,6 +10,7 @@ interface PuppyContextType{
     editPuppyInfo:(puppy:Puppy, puppyId:string) => Promise<Puppy>;
     puppies:Puppy[] | null; 
     setNewPuppy: (newPup:Puppy) => void; 
+    puppyUpdated:Puppy | null; 
     breedName: string | null;
 }
 
@@ -63,6 +64,7 @@ export const PuppyProvider = ({children}: PuppyContextProviderProps) => {
         try{
             let response = await updatePuppy(puppy, puppyId); 
             setPuppyUpdated(response); 
+            setPuppyByBreed(breedName!); 
             return response; 
         }catch(error:any){
             console.log("error in Puppy Context Patch"); 
@@ -83,7 +85,7 @@ export const PuppyProvider = ({children}: PuppyContextProviderProps) => {
     }
 
     return(
-        <PuppyContext.Provider value={{setPuppyByBreed, createNewPuppy, setBreedName, deletePuppyProfile, editPuppyInfo, puppies, setNewPuppy, breedName}}> 
+        <PuppyContext.Provider value={{setPuppyByBreed, createNewPuppy, setBreedName, deletePuppyProfile, editPuppyInfo, puppies, setNewPuppy, breedName, puppyUpdated}}> 
             {children}
         </PuppyContext.Provider>
     )
