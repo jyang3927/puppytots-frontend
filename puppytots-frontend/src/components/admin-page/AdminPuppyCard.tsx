@@ -120,7 +120,7 @@ export function AdminPuppyCard({puppy}: PuppyProps){
                 <Button variant="contained" size="small"  
                 sx={{backgroundColor:"#c9b694", color:"white", margin:"1rem 1rem 1rem 1rem", height:"2.5rem", fontFamily:"nunito, sans-serif", fontWeight:"800", fontSize:".9rem", display:'flex', justifyContent:"center",
                ':hover': {backgroundColor:'#5D786B', color:"white"}}} onClick={() => submitEdits()}
-                > Done </Button>
+                > Update </Button>
                 <Button variant="outlined" size="small"  
                 sx={{backgroundColor:"white", border: "1px solid #c9b694", color:"#c9b694", margin:"1rem 1rem 1rem 9.5rem", height:"2.5rem", fontFamily:"nunito, sans-serif", fontWeight:"800", fontSize:".9rem",
                ':hover': {backgroundColor:'#8B0000', color:"white"}}} onClick={() => deletePuppyProfile(puppy._id!)}
