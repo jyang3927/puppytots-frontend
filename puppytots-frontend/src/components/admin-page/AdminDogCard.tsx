@@ -14,7 +14,7 @@ interface DogProps{
 
 export function AdminDogCard({dog}: DogProps){
 
-    const {deleteOurDog, editDogInfo} = useDog(); 
+    const {deleteOurDog, editDogInfo, getAllOurDogs} = useDog(); 
 
     const [sex, setSex] = useState(dog.sex); 
     const [breed, setBreed] = useState(dog.breed); ; 
@@ -35,12 +35,13 @@ export function AdminDogCard({dog}: DogProps){
     function submitEdits(){
         let dogEdits = {breed:breed, sex:sex, weight:weight, name:name, details: details, imageUrl: dog.imageUrl}
         editDogInfo(dogEdits, dog._id!); 
+        getAllOurDogs();
         makeEditable(); 
-        setSex(dog.sex); 
-        setBreed(dog.breed)
-        setName(dog.name); 
-        setWeight(dog.weight); 
-        setDetails(dog.details); 
+        // setSex(dog.sex); 
+        // setBreed(dog.breed)
+        // setName(dog.name); 
+        // setWeight(dog.weight); 
+        // setDetails(dog.details); 
     }
     
 
@@ -57,6 +58,16 @@ export function AdminDogCard({dog}: DogProps){
                 />
                 <CardContent className="nunito PuppyCardContent">
                     <form className="NewDogForm" encType="multipart/form-data">
+                    <TextField
+                        className="AdminPuppyCardFormLabels"
+                        sx={{margin: ".5rem 0"}}
+                        type="text"
+                        size="small"
+                        disabled={isEditable}
+                        label="Name"
+                        value={name}
+                        onChange={(e) => setName(e.target.value)}
+                    />
                     <TextField
                         type="text"
                         sx={{margin: ".5rem 0"}}
@@ -81,18 +92,8 @@ export function AdminDogCard({dog}: DogProps){
                     <RadioGroup row value={breed} onChange={handleChangeBreed}>
                         <FormControlLabel disabled={isEditable} value="maltipoo" control={<Radio  sx={{color: "#EDE8D1", "&.Mui-checked": {color: "#9e7d41"}}} size="small" />} label="Maltese" />
                         <FormControlLabel disabled={isEditable} value="toy-poodle" control={<Radio  sx={{color: "#EDE8D1", "&.Mui-checked": {color: "#9e7d41"}}} size="small" />} label="Toy-Poodle" />
-                        <FormControlLabel disabled={isEditable} value="shihpoo" control={<Radio  sx={{color: "#EDE8D1", "&.Mui-checked": {color: "#9e7d41"}}} size="small" />} label="Maltipoo" />
+                        {/* <FormControlLabel disabled={isEditable} value="shihpoo" control={<Radio  sx={{color: "#EDE8D1", "&.Mui-checked": {color: "#9e7d41"}}} size="small" />} label="Maltipoo" /> */}
                     </RadioGroup>
-                    <TextField
-                        className="AdminPuppyCardFormLabels"
-                        sx={{margin: ".5rem 0"}}
-                        type="text"
-                        size="small"
-                        disabled={isEditable}
-                        label="Name"
-                        value={name}
-                        onChange={(e) => setName(e.target.value)}
-                    />
                     <TextField
                     type="number"
                     sx={{margin: ".5rem 0"}}

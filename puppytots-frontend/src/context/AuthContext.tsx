@@ -71,7 +71,7 @@ export const AuthProvider = ({ children }: AuthProviderProps) => {
           setUser(currentUser); 
           console.log("USE EFFECT SET CURRENT USER", user)
           setIsAuthInitializing(false); 
-          if(user?.email === "yangjm1287@gmail.com"){
+          if(currentUser?.email === "yangjm1287@gmail.com"){
         setIsBreeder(true); 
       }
       }); 

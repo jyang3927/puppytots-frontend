@@ -80,6 +80,11 @@ export function OurDogsForm(){
         if(imageUrl){
             let newDog = {breed:breed, sex:sex, name:name, weight:weight, details:details, imageUrl:imageUrl}; 
             createNewDog(newDog);
+            setSex(""); 
+            setBreed(""); 
+            setDetails(""); 
+            setWeight(0); 
+            setName(""); 
             handleClose(); 
         }
         

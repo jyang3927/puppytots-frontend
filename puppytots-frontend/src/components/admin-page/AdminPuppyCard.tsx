@@ -12,7 +12,6 @@ interface PuppyProps{
     puppy: Puppy; 
 }
 
-
 export function AdminPuppyCard({puppy}: PuppyProps){
 
     const {breedName, editPuppyInfo, deletePuppyProfile} = usePuppy();
@@ -41,11 +40,11 @@ export function AdminPuppyCard({puppy}: PuppyProps){
         let puppyEdits = {breed:puppy.breed, motherName:motherName, fatherName:fatherName, birth:birthDate, sex:sex, price:price, available:available, imageName: puppy.imageName}
         editPuppyInfo(puppyEdits, puppy._id!); 
         makeEditable(); 
-        setSex(puppy.sex); 
-        setBirth(dayjs(puppy.birth)); 
-        setMotherName(puppy.motherName); 
-        setFatherName(puppy.fatherName); 
-        setPrice(puppy.price); 
+        // setSex(puppy.sex); 
+        // setBirth(dayjs(puppy.birth)); 
+        // setMotherName(puppy.motherName); 
+        // setFatherName(puppy.fatherName); 
+        // setPrice(puppy.price); 
     }
     
 

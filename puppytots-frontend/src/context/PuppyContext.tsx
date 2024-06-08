@@ -26,28 +26,37 @@ export const PuppyProvider = ({children}: PuppyContextProviderProps) => {
     const [newPuppy, setNewPuppy] = useState<Puppy | null>(null); 
     const [puppyUpdated, setPuppyUpdated] = useState<Puppy | null>(null); 
 
-    const [puppyDeleted, setPuppyDeleted] = useState(null); 
 
     useEffect(() => {
         if(breedName !== null){
             console.log("CONTEXT BREEDNAME CHANGED? " + breedName)
-            setPuppyByBreed(breedName); 
-            console.log("puppies after breedName changed: " + puppies)
+            setPuppyByBreed(breedName).then(response => setPuppies(response));   
+            console.log("RESPONSE AFTER SETTING PUPPY", puppies)
+   
         }
-    }, [breedName, newPuppy, puppyDeleted, puppyUpdated]); 
-
+    }, [breedName]); 
+    
     const setPuppyByBreed = async(breed:string): Promise<Puppy[]> => {
         try{
             let response = await getAllPuppiesByBreed(breed); 
-            console.log("RESPONSE OF PUPPIES: " + response)
+            console.log("RESPONSE OF PUPPIES from DB: " + response.map((puppy) => console.log(puppy)))
             setPuppies(response); 
-            console.log("SET PUPPIES: " + puppies)
+            console.log("SET PUPPIES: " + puppies?.map((puppy) => console.log(puppy)))
             return response; 
         } catch(error:any){
             console.log("error in context Puppy"); 
             return error; 
         }
     }; 
+
+    // CREATE NEW PUPPY
+
+    useEffect(() => {
+        if(breedName !== null){
+            setPuppyByBreed(breedName); 
+            console.log("PUPPIES UPDATE AFTER NEW PUPPY", puppies); 
+        }
+    }, [newPuppy])
 
     const createNewPuppy = async(puppyInfo:Puppy): Promise<Puppy> => {
         try{
@@ -60,11 +69,24 @@ export const PuppyProvider = ({children}: PuppyContextProviderProps) => {
         }
     };
 
+    // EDIT PUPPY
+
+    useEffect(() => {
+        if(breedName !== null){
+            setPuppyByBreed(breedName).then((response) => setPuppies(response)); 
+            // console.log("PUPPIES UPDATE AFTER UPDATE PUPPY", response); 
+            // setPuppyByBreed(breedName).then(response => setPuppies(response));   
+            // console.log("RESPONSE AFTER SETTING PUPPY", puppies)
+        }
+    }, [puppyUpdated])
+
     const editPuppyInfo = async(puppy:Puppy, puppyId:string): Promise<Puppy> => {
         try{
             let response = await updatePuppy(puppy, puppyId); 
             setPuppyUpdated(response); 
-            setPuppyByBreed(breedName!); 
+            console.log("RESPONSE AFTER EDIT PUPPY INFO", response)
+            console.log("SETPUPPY UPDATE CHECK", puppyUpdated)
+            console.log("SET PUPPY EDIT PUPPY PUPPY STATE", puppies)
             return response; 
         }catch(error:any){
             console.log("error in Puppy Context Patch"); 
@@ -72,11 +94,14 @@ export const PuppyProvider = ({children}: PuppyContextProviderProps) => {
         }
     }
 
+    // DELETE PUPPY
+
     const deletePuppyProfile = async(puppyId:string) => {
         try{
             console.log(puppyId); 
             let response = await deletePuppy(puppyId); 
             setPuppyByBreed(breedName!); 
+            console.log("PUPPIES AFTER DELETE", puppies)
             return response; 
         }catch(error:any){
             console.log("error in Puppy Context Delete"); 

@@ -10,6 +10,7 @@ interface DogContextType{
     setNewDog:(newDog: Dog) => void;
     editDogInfo:(dog:Dog, dogId: string) => Promise<Dog>;
     ourDogsList: Dog[] | null; 
+    updateDogInfo:Dog | null; 
 }
 
 export const DogContext = createContext<DogContextType | undefined>(undefined); 
@@ -22,10 +23,13 @@ export const DogProvider = ({children}: DogContextProviderProps) => {
     
     const [ourDogsList, setOurDogsList] = useState<Dog[] | null>(null); 
     const [newDog, setNewDog] = useState<Dog | null>(null); 
+    const [updateDogInfo, setUpdateDogInfo] = useState<Dog | null>(null);
+    const [dogDeleted, setDogDeleted] = useState(null); 
 
     useEffect(() => {
         getAllOurDogs(); 
-    }, [newDog]); 
+        console.log("USE EFFECT GET ALL DOGS", ourDogsList)
+    }, [newDog, updateDogInfo]); 
 
     const createNewDog = async(newDog:Dog): Promise<Dog> => {
         try{
@@ -42,6 +46,8 @@ export const DogProvider = ({children}: DogContextProviderProps) => {
         try{
             let response = await getAllDogs(); 
             setOurDogsList(response);
+            console.log("GET ALL DOGS SET OUR DOGS LIST", ourDogsList)
+            console.log("GET ALL DOGS SET OUR DOGS LIST RESPONSE", response)
             return response; 
         }catch(error:any){
             console.log("Error in context get all Dogs"); 
@@ -52,7 +58,12 @@ export const DogProvider = ({children}: DogContextProviderProps) => {
     const editDogInfo = async(dog:Dog, dogId:string): Promise<Dog> => {
         try{
             let response = await updateDog(dog, dogId); 
-            getAllDogs(); 
+            setUpdateDogInfo(response); 
+            getAllOurDogs();
+            // setNewDog(response)
+            // let refreshDogList = await getAllOurDogs(); 
+            // setOurDogsList(refreshDogList)
+            console.log("UPDATED DOG INFO ", updateDogInfo)
             return response; 
         }catch(error:any){
             console.log("error in Puppy Context Patch"); 
@@ -63,7 +74,7 @@ export const DogProvider = ({children}: DogContextProviderProps) => {
     const deleteOurDog = async(dogId:string) => {
         try{
             let response = await deleteDog(dogId); 
-            getAllOurDogs(); 
+            getAllOurDogs();
             return response; 
         }catch(error:any){
             console.log("error in Dog Context Delete"); 
@@ -71,7 +82,7 @@ export const DogProvider = ({children}: DogContextProviderProps) => {
         }
     }
     return(
-        <DogContext.Provider value={{createNewDog, getAllOurDogs, setNewDog, deleteOurDog, editDogInfo, ourDogsList}}>
+        <DogContext.Provider value={{createNewDog, getAllOurDogs, setNewDog, deleteOurDog, editDogInfo, ourDogsList, updateDogInfo}}>
             {children}
         </DogContext.Provider>
     )

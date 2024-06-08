@@ -11,7 +11,7 @@ import { AdminDogCard } from "../admin-page/AdminDogCard";
 
 export function OurDogs(){
 
-    const{createNewDog, ourDogsList} = useDog();
+    const{getAllOurDogs, ourDogsList, updateDogInfo} = useDog();
 
     const {isBreeder} = useAuth(); 
     // const{user} = useAuth(); 
@@ -20,23 +20,27 @@ export function OurDogs(){
     const [maleDogs, setMaleDogs] = useState<Dog[] | null>(null) ;
     
     useEffect(() => {
-        getFemaleDogs(); 
+       getFemaleDogs().then(getfemales => setFemaleDogs(getfemales)); 
+        // setFemaleDogs(response);
         getMaleDogs(); 
-    }, [createNewDog])
+    }, [updateDogInfo])
 
-    const getFemaleDogs = () => {
-        if (ourDogsList){
-            let getAllFemales = ourDogsList.filter(dogs => dogs.sex.toLowerCase() === "female")
-            setFemaleDogs(getAllFemales);  
-        }
+    const getFemaleDogs = async() => {
+        let response = await getAllOurDogs(); 
+        console.log("RESPONSE OF GET ALL DOGS", response)
+        let getAllFemales = response.filter(dogs => dogs.sex.toLowerCase() === "female")
+            console.log("ALL FEMALE DOGS", getAllFemales)
+            return getAllFemales;
     }
+    
+    
+    const getMaleDogs = async () => {
+        let response = await getAllOurDogs(); 
 
-    const getMaleDogs = () => {
-        if(ourDogsList){
-            let getAllMales = ourDogsList.filter(dog => dog.sex.toLowerCase() === "male"); 
+        let getAllMales = response.filter(dogs => dogs.sex.toLowerCase() === "male")
             setMaleDogs(getAllMales);
         }
-    }
+    
 
     return(
         <div className="OurDogs">
@@ -62,7 +66,6 @@ export function OurDogs(){
                         { isBreeder === true ? maleDogs?.map(maleDog => <AdminDogCard dog={maleDog}/>)
                         : maleDogs?.map(maleDog => <DogCard dogInfo={maleDog}/>)
                         }
-                        {maleDogs?.map(maleDog => <DogCard dogInfo={maleDog}/>)}
                     </div>
                 </Container>
             </div>
