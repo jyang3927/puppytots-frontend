@@ -59,7 +59,6 @@ export const DogProvider = ({children}: DogContextProviderProps) => {
         try{
             let response = await updateDog(dog, dogId); 
             setUpdateDogInfo(response); 
-            getAllOurDogs();
             // setNewDog(response)
             // let refreshDogList = await getAllOurDogs(); 
             // setOurDogsList(refreshDogList)
@@ -74,7 +73,7 @@ export const DogProvider = ({children}: DogContextProviderProps) => {
     const deleteOurDog = async(dogId:string) => {
         try{
             let response = await deleteDog(dogId); 
-            getAllOurDogs();
+            let refreshGetAllDogs = getAllOurDogs();
             return response; 
         }catch(error:any){
             console.log("error in Dog Context Delete"); 

@@ -35,7 +35,7 @@ export const PuppyProvider = ({children}: PuppyContextProviderProps) => {
    
         }
     }, [breedName]); 
-    
+
     const setPuppyByBreed = async(breed:string): Promise<Puppy[]> => {
         try{
             let response = await getAllPuppiesByBreed(breed); 
