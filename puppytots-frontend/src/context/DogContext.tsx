@@ -59,9 +59,6 @@ export const DogProvider = ({children}: DogContextProviderProps) => {
         try{
             let response = await updateDog(dog, dogId); 
             setUpdateDogInfo(response); 
-            // setNewDog(response)
-            // let refreshDogList = await getAllOurDogs(); 
-            // setOurDogsList(refreshDogList)
             console.log("UPDATED DOG INFO ", updateDogInfo)
             return response; 
         }catch(error:any){

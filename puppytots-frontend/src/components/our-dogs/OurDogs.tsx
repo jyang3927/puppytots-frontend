@@ -5,7 +5,6 @@ import { useDog } from "../../hooks/useDog";
 import { useEffect, useState } from "react";
 import { Dog } from "../../models/Dog";
 import { DogCard } from "./DogCard";
-import { OurDogsForm } from "../forms/OurDogsForm";
 import { useAuth } from "../../hooks/useAuth";
 import { AdminDogCard } from "../admin-page/AdminDogCard";
 
@@ -14,7 +13,6 @@ export function OurDogs(){
     const{getAllOurDogs, ourDogsList, updateDogInfo} = useDog();
 
     const {isBreeder} = useAuth(); 
-    // const{user} = useAuth(); 
 
     const [femaleDogs, setFemaleDogs] = useState<Dog[] | null>(null); 
     const [maleDogs, setMaleDogs] = useState<Dog[] | null>(null) ;

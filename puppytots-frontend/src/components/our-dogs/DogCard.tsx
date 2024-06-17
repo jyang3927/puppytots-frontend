@@ -1,6 +1,4 @@
-import { Button, Card, CardActions, CardContent, CardHeader, CardMedia, Collapse, IconButton, IconButtonProps, Typography, styled } from "@mui/material";
-import { useAuth } from "../../hooks/useAuth";
-import { useDog } from "../../hooks/useDog";
+import { Card, CardActions, CardContent, CardHeader, CardMedia, Collapse, IconButton, IconButtonProps, Typography, styled } from "@mui/material";
 import { Dog } from "../../models/Dog"
 import "../../styles/dogCard.css"
 import { useState } from "react";
@@ -27,26 +25,6 @@ const ExpandMore = styled((props: ExpandMoreProps) => {
   }));
 
 export function DogCard({dogInfo}:DogCardProps){
-
-  const{user} = useAuth();
-  const {deleteOurDog} = useDog(); 
-    // let{deleteOurDog} = useDog(); 
-    // let{user} = useAuth(); 
-    
-    // return(
-    //     <div className="DogCard sniglet-regular">
-    //         <h3 className="DogInfoName">{dogInfo.name}</h3>
-    //         <img src={dogInfo.imageUrl} className="DogImageProfile"/>
-    //         <div className="DogCardContainer">
-    //             {/* <img src={dogInfo.imageUrl} className="DogImageProfile"/> */}
-    //             <p className="DogCardDetails">Breed: {dogInfo.breed}</p>
-    //             <p className="DogCardDetails">Weight: {dogInfo.weight}lbs</p>
-    //             <p className="DogCardDetails">Details: {dogInfo.details}</p>
-    //         </div>
-    //         {user?.email === 'yangjm1287@gmail.com' && <Button variant="contained" size="small" color="secondary" style={{marginBottom:'10px'}} className="DogProfileDelete" onClick={() => deleteOurDog(dogInfo._id!)}>Delete Dog</Button>}
-
-    //     </div>
-    // )
 
     const [expanded, setExpanded] = useState(false);
 
@@ -75,9 +53,6 @@ export function DogCard({dogInfo}:DogCardProps){
             <Typography sx={{fontWeight: "800", fontFamily:"nunito", fontSize: "1.5rem", color:"#7f6534"}}>
             {dogInfo.breed.toUpperCase()}
             </Typography>
-            {/* <Typography sx={{fontWeight: "600", fontFamily:"nunito", fontSize: "1rem", color:"#9e7d41"}}>
-            {dogInfo.breed}
-            </Typography> */}
           </div>
           <ExpandMore
             expand={expanded}
@@ -99,13 +74,6 @@ export function DogCard({dogInfo}:DogCardProps){
             </Typography>
           </CardContent>
         </Collapse>
-        {/* {user?.email === 'yangjm1287@gmail.com' && 
-        <Button variant="contained" size="small"  
-          sx={{backgroundColor:"#c9b694", color:"white", margin:"1rem 6rem", height:"2.5rem", fontFamily:"nunito, sans-serif", fontWeight:"900", fontSize:".9rem",
-              ':hover': {backgroundColor:'#9e7d41', color:"white"}}} 
-          
-          onClick={() => deleteOurDog(dogInfo._id!)}
-          > Edit Dog</Button>} */}
       </Card>
     </div>
     )

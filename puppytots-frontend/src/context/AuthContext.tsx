@@ -52,18 +52,6 @@ export const AuthProvider = ({ children }: AuthProviderProps) => {
     }
   };
 
-  // useEffect(() => {
-  //   const unsubscribe = auth.onAuthStateChanged((currentUser) => {
-  //     console.log(currentUser)
-  //     setUser(currentUser);
-  //     setIsAuthInitializing(false); 
-  //     console.log("setUser", user)
-  //     if(user?.email === "yangjm1287@gmail.com"){
-  //       setIsBreeder(true); 
-  //     }
-  //   });
-  //   return () => unsubscribe();
-  // }, []);
 
   // whenever the component re-renders, set the user as to what it was
   useEffect(() => {

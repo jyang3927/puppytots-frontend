@@ -1,9 +1,6 @@
 import { Card, CardMedia, TextField, CardContent, FormLabel, Button, FormControlLabel, Radio, RadioGroup } from "@mui/material";
 import { useState } from "react";
 import React from "react";
-import dayjs, { Dayjs } from "dayjs";
-import { LocalizationProvider, DatePicker } from "@mui/x-date-pickers";
-import { AdapterDayjs } from "@mui/x-date-pickers/AdapterDayjs";
 import "../../styles/adminPuppyCard.css"
 import { Dog } from "../../models/Dog";
 import { useDog } from "../../hooks/useDog";
@@ -37,11 +34,6 @@ export function AdminDogCard({dog}: DogProps){
         editDogInfo(dogEdits, dog._id!); 
         getAllOurDogs();
         makeEditable(); 
-        // setSex(dog.sex); 
-        // setBreed(dog.breed)
-        // setName(dog.name); 
-        // setWeight(dog.weight); 
-        // setDetails(dog.details); 
     }
     
 
@@ -78,21 +70,10 @@ export function AdminDogCard({dog}: DogProps){
                         value={sex}
                         onChange={(e) => setSex(e.target.value)}
                     />
-                    {/* <TextField
-                        type="text"
-                        sx={{margin: ".5rem 0"}}
-                        className="AdminPuppyCardFormLabels"
-                        size="small"
-                        disabled={isEditable}
-                        label = "Breed"
-                        value={breed}
-                        onChange={(e) => setBreed(e.target.value)}
-                    /> */}
                     <FormLabel>Breed</FormLabel>
                     <RadioGroup row value={breed} onChange={handleChangeBreed}>
                         <FormControlLabel disabled={isEditable} value="maltipoo" control={<Radio  sx={{color: "#EDE8D1", "&.Mui-checked": {color: "#9e7d41"}}} size="small" />} label="Maltese" />
                         <FormControlLabel disabled={isEditable} value="toy-poodle" control={<Radio  sx={{color: "#EDE8D1", "&.Mui-checked": {color: "#9e7d41"}}} size="small" />} label="Toy-Poodle" />
-                        {/* <FormControlLabel disabled={isEditable} value="shihpoo" control={<Radio  sx={{color: "#EDE8D1", "&.Mui-checked": {color: "#9e7d41"}}} size="small" />} label="Maltipoo" /> */}
                     </RadioGroup>
                     <TextField
                     type="number"

@@ -1,4 +1,4 @@
-import { Alert, Box, Button, FormControlLabel, FormLabel, Modal, Radio, RadioGroup, TextField, styled } from "@mui/material";
+import { Box, Button, FormControlLabel, FormLabel, Modal, Radio, RadioGroup, TextField, styled } from "@mui/material";
 import { useEffect, useState } from "react";
 import { DatePicker, LocalizationProvider } from '@mui/x-date-pickers';
 import { AdapterDayjs } from '@mui/x-date-pickers/AdapterDayjs';
@@ -52,19 +52,6 @@ export function NewPuppyForm(){
         setOpen(false);
     };
 
-    // const handleSubmit= (e:FormEvent) => {
-    //     e.preventDefault();
-    //     let birthDate;
-    //     if(birth !== null){
-    //         birthDate = birth?.toDate(); 
-    //     }else {
-    //         birthDate = new Date(); 
-    //     }
-    //     console.log("CREATING NEW PUPPY" + breed + motherName + fatherName+ birthDate + sex + price + available); 
-        
-    //     createNewPuppy({breed:breed, motherName:motherName, fatherName:fatherName, birth:birthDate, sex:sex, price:price, available:available, imageName:"" }); 
-    // }
-
     const handleChangeSex = (event: React.ChangeEvent<HTMLInputElement>) => {
         setSex((event.target as HTMLInputElement).value);
     };
@@ -96,16 +83,6 @@ export function NewPuppyForm(){
         }catch(error:any){
             console.error("Error loading image to storage")
         }
-        // let urlSet = await getDownloadURL(ref(storage, `puppytots/puppyImages/${randomName} `)); 
-        // setImageUrl(urlSet)
-        
-        
-        // .then((snapshot) => {
-        // getDownloadURL(snapshot.ref).then((url) => {
-        //     urlSet = url;
-        //     })
-        // })
-        // return urlSet;
     }
 
     useEffect(() => {
@@ -137,25 +114,6 @@ export function NewPuppyForm(){
         e.preventDefault(); 
         console.log("FileName", file)
         await uploadFile(); 
-        // const formData = new FormData(); 
-        // formData.append
-        // setImageUrl(imageLocation);
-        // let birthDate;
-        // if(birth !== null){
-        //     birthDate = birth?.toDate(); 
-        // }else {
-        //     birthDate = new Date(); 
-        // }
-        // console.log("CREATING NEW PUPPY" + breed + motherName + fatherName+ birthDate + sex + price + available+imageUrl); 
-        
-        // let newPup = {breed:breed, motherName:motherName, fatherName:fatherName, birth:birthDate, sex:sex, price:price, available:available, imageName: imageUrl }; 
-
-        // // formData.append('puppyData', JSON.stringify(newPup)); 
-
-        // // formData.append('image', file); 
-        
-        // await createNewPuppy(newPup); 
-        // await axios.post("/api/puppies", formData, {headers: {'Content-Type': 'multipart/form-data'}})
     }
 
     return(
@@ -194,8 +152,6 @@ export function NewPuppyForm(){
                         >
                         Upload photo
                         <VisuallyHiddenInput type="file" name="image" onChange={handleOnChange}/>
-                        {/* <input type="file" name="image" className="inputFile" onChange={handleOnChange}/> */}
-
                     </Button>
                     <Button type="submit" variant="contained"sx={{backgroundColor:"#c9b694", color:"white", margin:".6rem 0", fontFamily:"nunito, sans-serif", fontWeight:"900", ':hover': {backgroundColor:'#9e7d41', color:"white"}}} >Submit</Button>
                     </form>

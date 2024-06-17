@@ -74,9 +74,6 @@ export const PuppyProvider = ({children}: PuppyContextProviderProps) => {
     useEffect(() => {
         if(breedName !== null){
             setPuppyByBreed(breedName).then((response) => setPuppies(response)); 
-            // console.log("PUPPIES UPDATE AFTER UPDATE PUPPY", response); 
-            // setPuppyByBreed(breedName).then(response => setPuppies(response));   
-            // console.log("RESPONSE AFTER SETTING PUPPY", puppies)
         }
     }, [puppyUpdated])
 
