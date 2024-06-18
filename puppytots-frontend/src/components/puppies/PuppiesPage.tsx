@@ -6,13 +6,14 @@ import { useEffect } from "react";
 import { useAuth } from "../../hooks/useAuth";
 import { AdminPuppyCard } from "../admin-page/AdminPuppyCard";
 import { Puppy } from "../../models/Puppy";
+import { PuppyCard } from "./PuppyCard";
 
 export function PuppiesPage(){
 
     const {breed} = useParams(); 
-    const {user, isBreeder} = useAuth(); 
+    const {isBreeder} = useAuth(); 
 
-    const {setBreedName, puppies, breedName, puppyUpdated, setPuppyByBreed} = usePuppy(); 
+    const {setBreedName, puppies, breedName} = usePuppy(); 
     
     useEffect(() => {
         if(breed !== undefined){
@@ -32,10 +33,12 @@ export function PuppiesPage(){
 
     const showPuppiesDisplayed = (puppies:Puppy[]) => {
         console.log("PUPPIES BEING DISPLAYED", puppies)
-        if(puppies){
+        if(puppies && isBreeder === true){
             return puppies.map((puppy) => <AdminPuppyCard puppy={puppy}/>)
         }
-        
+        else if (puppies){
+            return puppies.map((puppy) => <PuppyCard puppy={puppy}/>)
+        }
     }
 
     const breedType = () => {
@@ -53,7 +56,7 @@ export function PuppiesPage(){
                 <h1 className="nunito breedHeader">- {breedType()}S -</h1>
             </div>
             <div className="PuppyList">
-                {puppies !== null && isBreeder === true && showPuppiesDisplayed(puppies)}; 
+                {puppies !== null && showPuppiesDisplayed(puppies)}; 
             </div>
         </div>
     )
